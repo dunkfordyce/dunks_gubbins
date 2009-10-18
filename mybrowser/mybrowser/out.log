@@ -1,0 +1,155 @@
+err <BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>: unknown signal name: close-web-view
+err <BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>: unknown signal name: create-plugin-widget
+err <BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>: unknown signal name: create-web-view
+err <BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>: unknown signal name: database-quota-exceeded
+err <BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>: unknown signal name: download-requested
+err <BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>: unknown signal name: load-error
+err <BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>: unknown signal name: mime-type-policy-decision-requested
+err <BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>: unknown signal name: move-cursor
+err <BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>: unknown signal name: navigation-policy-decision-requested
+err <BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>: unknown signal name: new-window-policy-decision-requested
+err <BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>: unknown signal name: print-requested
+err <BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>: unknown signal name: redo
+err <BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>: unknown signal name: resource-request-starting
+err <BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>: unknown signal name: undo
+err <BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>: unknown signal name: web-view-ready
+uri-changed emit http://google.com <type 'str'>
+unhandled signal navigation-requested (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, <webkit.WebFrame object at 0x9bfd414 (WebKitWebFrame at 0x9c8f200)>, <webkit.NetworkRequest object at 0x9bfd3ec (WebKitNetworkRequest at 0x99fffc8)>)
+TypeError: can't convert return value to desired type
+mybrowser.py:135: Warning: g_value_get_int: assertion `G_VALUE_HOLDS_INT (value)' failed
+  self._browser.open(url)
+mybrowser.py:135: Warning: g_value_reset: assertion `G_IS_VALUE (value)' failed
+  self._browser.open(url)
+mybrowser.py:135: Warning: g_value_set_int: assertion `G_VALUE_HOLDS_INT (value)' failed
+  self._browser.open(url)
+mybrowser.py:135: Warning: g_value_unset: assertion `G_IS_VALUE (value)' failed
+  self._browser.open(url)
+unhandled signal load-started (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, <webkit.WebFrame object at 0x9bfd414 (WebKitWebFrame at 0x9c8f200)>)
+unhandled signal set-scroll-adjustments (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, <gtk.Adjustment object at 0x9bfd414 (GtkAdjustment at 0x9c5d860)>, <gtk.Adjustment object at 0x9dbdd74 (GtkAdjustment at 0x9c5d8a0)>)
+uri http://google.com
+err <BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>: unknown signal name: close-web-view
+err <BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>: unknown signal name: create-plugin-widget
+err <BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>: unknown signal name: create-web-view
+err <BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>: unknown signal name: database-quota-exceeded
+err <BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>: unknown signal name: download-requested
+err <BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>: unknown signal name: load-error
+err <BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>: unknown signal name: mime-type-policy-decision-requested
+err <BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>: unknown signal name: move-cursor
+err <BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>: unknown signal name: navigation-policy-decision-requested
+err <BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>: unknown signal name: new-window-policy-decision-requested
+err <BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>: unknown signal name: print-requested
+err <BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>: unknown signal name: redo
+err <BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>: unknown signal name: resource-request-starting
+err <BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>: unknown signal name: undo
+err <BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>: unknown signal name: web-view-ready
+uri-changed emit http://xkcd.org <type 'str'>
+unhandled signal navigation-requested (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, <webkit.WebFrame object at 0x9dbdf2c (WebKitWebFrame at 0xa0e92f0)>, <webkit.NetworkRequest object at 0x9dbdf04 (WebKitNetworkRequest at 0x9a00230)>)
+TypeError: can't convert return value to desired type
+unhandled signal load-started (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, <webkit.WebFrame object at 0x9dbdf2c (WebKitWebFrame at 0xa0e92f0)>)
+unhandled signal set-scroll-adjustments (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, <gtk.Adjustment object at 0x9dbdf2c (GtkAdjustment at 0xa0e68c8)>, <gtk.Adjustment object at 0x9dbdf04 (GtkAdjustment at 0xa0e6908)>)
+uri http://xkcd.org
+unhandled signal navigation-requested (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, <webkit.WebFrame object at 0x9e24824 (WebKitWebFrame at 0x9c8f200)>, <webkit.NetworkRequest object at 0x9e2484c (WebKitNetworkRequest at 0xa0fef80)>)
+TypeError: can't convert return value to desired type
+mybrowser.py:361: Warning: g_value_get_int: assertion `G_VALUE_HOLDS_INT (value)' failed
+  gtk.main()
+mybrowser.py:361: Warning: g_value_reset: assertion `G_IS_VALUE (value)' failed
+  gtk.main()
+mybrowser.py:361: Warning: g_value_set_int: assertion `G_VALUE_HOLDS_INT (value)' failed
+  gtk.main()
+mybrowser.py:361: Warning: g_value_unset: assertion `G_IS_VALUE (value)' failed
+  gtk.main()
+unhandled signal status-bar-text-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, '')
+unhandled signal status-bar-text-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, '')
+unhandled signal load-committed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, <webkit.WebFrame object at 0x9e24824 (WebKitWebFrame at 0xa0e92f0)>)
+unhandled signal title-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, <webkit.WebFrame object at 0x9e2484c (WebKitWebFrame at 0xa0e92f0)>, 'xkcd - A Webcomic - Static')
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 13)
+unhandled signal navigation-requested (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, <webkit.WebFrame object at 0x9e2484c (WebKitWebFrame at 0x9c8f200)>, <webkit.NetworkRequest object at 0x9e2489c (WebKitNetworkRequest at 0xa0fef38)>)
+TypeError: can't convert return value to desired type
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 13)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 15)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 15)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 16)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 16)
+unhandled signal status-bar-text-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, '')
+unhandled signal status-bar-text-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, '')
+unhandled signal load-committed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, <webkit.WebFrame object at 0x9e2484c (WebKitWebFrame at 0x9c8f200)>)
+unhandled signal title-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, <webkit.WebFrame object at 0x9e2484c (WebKitWebFrame at 0x9c8f200)>, 'Google')
+unhandled signal window-object-cleared (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, <webkit.WebFrame object at 0x9e2484c (WebKitWebFrame at 0x9c8f200)>, <gpointer at 0xb505d7a8>, <gpointer at 0xb4990020>)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 29)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 18)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 18)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 19)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 20)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 21)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 23)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 25)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 28)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 29)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 29)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 33)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 35)
+unhandled signal hovering-over-link (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, '', 'http://www.google.co.uk/intl/en/ads/')
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 29)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 42)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 47)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 56)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 31)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 32)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 34)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 64)
+unhandled signal navigation-requested (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, <webkit.WebFrame object at 0x9e2484c (WebKitWebFrame at 0x9c8f200)>, <webkit.NetworkRequest object at 0x9e2489c (WebKitNetworkRequest at 0xa206938)>)
+TypeError: can't convert return value to desired type
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 100)
+unhandled signal load-finished (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, <webkit.WebFrame object at 0x9e2484c (WebKitWebFrame at 0x9c8f200)>)
+unhandled signal load-started (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, <webkit.WebFrame object at 0x9e2484c (WebKitWebFrame at 0x9c8f200)>)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 37)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 37)
+release <Tab object at 0x9bfd324 (GtkVBox at 0x9c8e010)> <gtk.gdk.Event at 0x9bfada0: GDK_KEY_RELEASE keyval=Control_L>
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 37)
+unhandled signal status-bar-text-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, '')
+unhandled signal status-bar-text-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, '')
+unhandled signal load-committed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, <webkit.WebFrame object at 0x9e2484c (WebKitWebFrame at 0x9c8f200)>)
+unhandled signal window-object-cleared (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, <webkit.WebFrame object at 0x9e2484c (WebKitWebFrame at 0x9c8f200)>, <gpointer at 0xb505da50>, <gpointer at 0xb4994c60>)
+unhandled signal title-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, <webkit.WebFrame object at 0x9e2484c (WebKitWebFrame at 0x9c8f200)>, 'Google Advertising Programmes')
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 42)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9dbde3c (WebKitWebView at 0x9c92900)>, 38)
+Traceback (most recent call last):
+  File "mybrowser.py", line 115, in f
+    def f(*args):
+KeyboardInterrupt
+** Message: NP_Initialize
+** Message: NP_Initialize succeeded
+** Message: NP_Initialize
+** Message: NP_Initialize succeeded
+** Message: NP_Initialize
+** Message: NP_Initialize succeeded
+** Message: NP_Initialize
+** Message: NP_Initialize succeeded
+unhandled signal hovering-over-link (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, None, None)
+press <Tab object at 0x9bfd324 (GtkVBox at 0x9c8e010)> <gtk.gdk.Event at 0x9bfada0: GDK_KEY_PRESS keyval=Super_L>
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 43)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 47)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 49)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 51)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 53)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 55)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 59)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 62)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 63)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 65)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 68)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 68)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 70)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 72)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 73)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 73)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 73)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 73)
+unhandled signal load-progress-changed (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, 100)
+unhandled signal load-finished (<BrowserPage object at 0x9bfd374 (WebKitWebView at 0x9c92860)>, <webkit.WebFrame object at 0x9e2489c (WebKitWebFrame at 0x9c8f200)>)
+release <Tab object at 0x9bfd324 (GtkVBox at 0x9c8e010)> <gtk.gdk.Event at 0x9bfada0: GDK_KEY_RELEASE keyval=Super_L>
+press <Tab object at 0x9bfd324 (GtkVBox at 0x9c8e010)> <gtk.gdk.Event at 0x9bfada0: GDK_KEY_PRESS keyval=Super_L>
+Traceback (most recent call last):
+  File "mybrowser.py", line 361, in <module>
+    gtk.main()
+KeyboardInterrupt
