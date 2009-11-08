@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://tooomanytabs/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://tooomanytabs/locale/overlay.dtd">
+<overlay id="tooomanytabs-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script src="overlay.js"/>
+
+    <menupopup id="menu_ToolsPopup">
+        <menu label="&tooomanytabs.label;">
+            <menupopup>
+                <menuitem label="&tooomanytabs.close_old_tabs.label;"
+                        oncommand="tooomanytabs.show_close_old_tabs();"
+                        key="tooomanytabs-close-old-tabs-key"
+                />
+            </menupopup>
+        </menu>
+    </menupopup>
+
+    <keyset>
+        <key id="tooomanytabs-close-old-tabs-key" 
+                modifiers="control shift" 
+                key="S" 
+                oncommand="tooomanytabs.show_close_old_tabs();"
+        />
+    </keyset>
+
+</overlay>

@@ -1,0 +1,5 @@
+content   tooomanytabs                 chrome/content/
+skin      tooomanytabs   classic/1.0   chrome/skin/
+locale    tooomanytabs   en-US         chrome/locale/en-US/
+
+overlay   chrome://browser/content/browser.xul   chrome://tooomanytabs/content/ff-overlay.xul

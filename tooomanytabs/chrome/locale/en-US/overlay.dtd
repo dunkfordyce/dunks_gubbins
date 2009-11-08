@@ -1,0 +1,9 @@
+<!ENTITY tooomanytabs.label "Tooo Many Tabs...">
+<!ENTITY tooomanytabs.close_old_tabs.label "Close old tabs...">
+<!ENTITY tooomanytabsContext.label "Your Menuitem">
+<!ENTITY tooomanytabsContext.accesskey "Y">
+<!ENTITY tooomanytabsToolbarButton.label "Your Toolbar Button">
+<!ENTITY tooomanytabsToolbarButton.tooltip "This is your toolbar button!">
+<!ENTITY tooomanytabsSidebar.label "Your Sidebar">
+<!ENTITY tooomanytabsToolbar.name  "example">
+<!ENTITY tooomanytabsToolbar.label "This is an example toolbar. You can hide it under View &gt; toolbars &gt; &tooomanytabsToolbar.name;">
