@@ -3,12 +3,15 @@ import logging
 import time
 import urlparse
 import tempfile
+import sqlite3
 
 import gobject
 import gtk
 import webkit
 from gtk import gdk
 import pango
+
+
 
 
 
@@ -37,7 +40,6 @@ class HistoryStore(object):
             item.direct_visits += s_item.direct_visits
             print "history old item", s_item.url, item.visits, item.direct_visits
             return item 
-
 
 history_store = HistoryStore()
 
@@ -109,6 +111,150 @@ class AddressBar(gtk.HBox):
         self.emit('request-uri-change', sender.get_text())
 
 
+class CompleteWin(gtk.Window):
+    def __init__(self, entry):
+        self.entry = entry
+        gtk.Window.__init__(self, type=gtk.WINDOW_POPUP)
+
+        self.scrolling_win = gtk.ScrolledWindow()
+        self.scrolling_win.props.hscrollbar_policy = gtk.POLICY_NEVER
+        self.scrolling_win.props.vscrollbar_policy = gtk.POLICY_AUTOMATIC
+
+        self.model = AwesomeTreeModel(entry)
+        self.list = gtk.TreeView(self.model)
+        self.list.set_enable_search(False)
+
+        self.list_column = gtk.TreeViewColumn('Column 0')
+        self.list.append_column(self.list_column)
+        self.cell = gtk.CellRendererText()
+        self.list_column.pack_start(self.cell, True)
+        self.list_column.add_attribute(self.cell, 'text', 0)
+
+        self.list.set_headers_visible(False)
+
+        self.scrolling_win.add(self.list)
+        self.add(self.scrolling_win)
+        #self.add(self.list)
+
+        entry_rect = entry.get_allocation()
+        top_lev_pos = entry.get_toplevel().get_position()
+        self.move(entry_rect.x + top_lev_pos[0], entry_rect.y + entry_rect.height + top_lev_pos[1])
+        self.set_size_request(entry_rect.width, 300)
+
+        self.show_all()
+
+
+class AwesomeTreeModel(gtk.GenericTreeModel):
+    column_types = (str, str)
+    column_names = ['url', 'title']
+
+    def __init__(self, entry):
+        gtk.GenericTreeModel.__init__(self)
+        self.entry = entry
+        #self.entry.connect('key-press-event', self.entry_handle_key_press_event)
+        self.search_term = None
+        self.items = []
+
+        #self.set_search_term(entry.get_text())
+
+    def set_search_term(self, term):
+        print "set term", term
+        if term == self.search_term:
+            return 
+
+        items = [
+            (url, item)
+            for url, item in history_store.items.iteritems()
+            if (term in url or (item.title and term in item.title))
+        ]
+
+        items.sort(key=lambda x: (x[1].direct_visits, x[1].visits))
+        
+        self.items = items
+        print items
+
+    def entry_handle_key_press_event(self, sender, event):
+        self.set_search_term(sender.get_text())
+
+    def get_column_names(self):
+        return self.column_names[:]
+
+    def on_get_flags(self):
+        return gtk.TREE_MODEL_LIST_ONLY
+
+
+    def on_iter_has_child(self, rowref):
+        print "on_iter_has_child", self, rowref
+        return False
+
+    def on_iter_parent(self, child):
+        print "on_iter_parent", child
+        return None
+
+    def on_get_n_columns(self):
+        print "on_get_n_colums"
+        return len(self.column_types)
+
+    def on_get_column_type(self, n):
+        return self.column_types[n]
+
+    def on_get_iter(self, path):
+        print "on_get_iter", path
+        #self.set_search_term(self.entry.get_text())
+        return path[0]
+
+    def on_get_path(self, rowref):
+        print "on_get_path", rowref
+        return rowref
+
+    def on_get_value(self, rowref, column):
+        print "get value", rowref, column
+        if column is 0:
+            return self.items[rowref][0]
+        elif column is 1:
+            return self.items[rowref][1]
+
+
+    def on_iter_next(self, rowref):
+        print "on_iter_next", rowref
+        if rowref + 1 < len(self.items):
+            return rowref + 1
+
+    def on_iter_children(self, rowref):
+        print "on_iter_children"
+        if rowref:
+            return None
+        return None
+
+    def on_iter_has_child(self, rowref):
+        print "on_iter_has_child", rowref
+        return False
+
+    def on_iter_n_children(self, rowref):
+        print "n children", rowref
+        if rowref:
+            return 0
+        return len(self.items)
+
+    def on_iter_nth_child(self, rowref, n):
+        print "on_iter_nth_child", rowref, n
+        if rowref:
+            return None
+        return n
+
+    def on_iter_parent(self, child):
+        print "on_iter_parent", child
+        return None
+
+
+
+
+
+
+def match_func(completion, key_string, iter, func_data):
+    return True
+
+
 class BrowserPage(gtk.VBox):
     def __init__(self):
         gtk.VBox.__init__(self, spacing=4)
@@ -118,6 +264,7 @@ class BrowserPage(gtk.VBox):
         self.history_item = None
         self.next_history_direct = False
         self.set_history_title = False
+        self.address_entry_popup = None
 
         self.browser = webkit.WebView()
         self.browser.connect('button-press-event', self.browser_handle_button_press_event)
@@ -130,17 +277,32 @@ class BrowserPage(gtk.VBox):
         self.browser.connect('load-progress-changed', self.browser_handle_load_progress_changed)
         self.browser.connect('navigation-requested', self.browser_handle_navigation_requested)
 
-        self.address_entry = gtk.Entry()
-        self.address_entry.set_has_frame(False)
-        self.address_entry.set_inner_border(None)
-        self.address_entry.set_size_request(-1, 25)
+        #self.address_entry = gtk.Entry()
+        #self.address_entry.set_has_frame(False)
+        #self.address_entry.set_inner_border(None)
+        #self.address_entry.set_size_request(-1, 25)
+        #self.address_entry.connect('activate', self.address_entry_handle_activate)
+        #self.address_entry.connect('focus-in-event', self.address_entry_handle_focus)
+        #self.address_entry.connect('focus-out-event', self.address_entry_handle_focus_out_event)
+        #self.address_entry.connect('button-press-event', self.address_entry_handle_button_press_event)
+        #self.address_completion = gtk.EntryCompletion()
+        #self.address_completion.set_match_func(match_func, None)   
+        self.address_completion_store = AwesomeTreeModel(None) #self.address_entry)
+        #self.address_completion.set_model(self.address_completion_store)
+        #self.address_entry.set_completion(self.address_completion)
+        #self.address_completion.set_text_column(0)
+
+        self.address_combo = gtk.ComboBoxEntry(self.address_completion_store, 0)
+        self.address_combo.connect('popdown', self.address_combo_handle_popdown)
+        self.address_combo.connect('popup', self.address_combo_handle_popup)
+        
+        self.address_entry = self.address_combo.child
         self.address_entry.connect('activate', self.address_entry_handle_activate)
-        self.address_entry.connect('focus-in-event', self.address_entry_handle_focus)
-        self.address_entry.connect('focus-out-event', self.address_entry_handle_focus_out_event)
-        self.address_entry.connect('button-press-event', self.address_entry_handle_button_press_event)
+        self.address_entry.connect('changed', self.address_entry_handle_changed)
+        self.address_completion_store.entry = self.address_entry
 
         self.toolbar = gtk.HBox(spacing=0)
-        self.toolbar.pack_start(self.address_entry, fill=True, expand=True, padding=0)
+        self.toolbar.pack_start(self.address_combo, fill=True, expand=True, padding=0)
 
         self.scrolling_win = gtk.ScrolledWindow()
         self.scrolling_win.props.hscrollbar_policy = gtk.POLICY_AUTOMATIC
@@ -152,12 +314,19 @@ class BrowserPage(gtk.VBox):
 
         self.show_all()
 
+    def address_combo_handle_popdown(self, sender):
+        print "down", sender
+    def address_combo_handle_popup(self, sender):
+        print "up", sender
+    def address_entry_handle_changed(self, sender):
+        print "changed", sender.get_text()
+        self.address_completion_store.set_search_term(sender.get_text())
+
     def open(self, url):
         if url and '://' not in url:
             url = "http://"+url
 
         if url != self.current_url:
-            self.current_url = url
             self.history_item = HistoryItem(url)
             self.history_item.direct_visits += 1
 
@@ -172,6 +341,9 @@ class BrowserPage(gtk.VBox):
     def address_entry_handle_focus(self, sender, direction):
         self.address_entry.set_position(-1)
         self.address_entry.select_region(0, -1)
+        if self.address_entry_popup:
+            self.address_entry_popup.destroy()
+        self.address_entry_popup = CompleteWin(self.address_entry)
 
     def address_entry_handle_focus_out_event(self, sender, event):
         self.address_entry.select_region(0, 0)
@@ -195,25 +367,27 @@ class BrowserPage(gtk.VBox):
         print "icon loaded", args
 
     def browser_handle_load_committed(self, browser, frame):
+        print "alloc", self.address_entry.get_allocation()
         main_frame = self.browser.get_main_frame()
         if frame is main_frame:
             print "load comit", frame.get_uri()
             #self.history_item = history_store.add(frame.get_uri(), direct=self.next_history_direct)
-            self.current_url = frame.get_uri()
-            if self.history_item is None:
-                self.history_item = HistoryItem(frame.get_uri())
-            self.history_item.visits += 1
-            self.history_item.url = frame.get_uri()
-            self.history_item = history_store.merge(self.history_item)
-            self.set_history_title = False
+            if self.current_url != frame.get_uri():
+                self.current_url = frame.get_uri()
+                if self.history_item is None:
+                    self.history_item = HistoryItem(frame.get_uri())
+                self.history_item.visits += 1
+                self.history_item.url = frame.get_uri()
+                self.last_history_item = history_store.merge(self.history_item)
+                self.set_history_title = False
+                self.history_item = None
             self.address_entry.set_text(frame.get_uri())
-                
 
     def browser_handle_load_finished(self, browser, frame):
         main_frame = self.browser.get_main_frame()
         if frame is main_frame:
             print "load fin", frame.get_uri(), frame.get_title()
-            self.history_item.title = frame.get_title()
+            #self.last_history_item.title = frame.get_title()
         #    history_store.add(frame.get_uri(), frame.get_title())
         pass
 
@@ -232,7 +406,8 @@ class BrowserPage(gtk.VBox):
     def browser_handle_title_changed(self, view, frame, title):
         self.emit('title-changed', title)
         if not self.set_history_title:
-            self.history_item.title = title 
+            self.set_history_title = True
+            self.last_history_item.title = title 
 
 gobject.signal_new("open-in-new-window", BrowserPage, gobject.SIGNAL_RUN_FIRST,
                    gobject.TYPE_NONE, (gobject.TYPE_STRING, ))

@@ -3,6 +3,8 @@ import os
 
 
 def run():
+    if not os.path.exists('dist'):
+        os.mkdir('dist')
     target = 'dist/tooomanytabs@dunkfordyce.xpi'
     if os.path.exists(target):
         os.unlink(target)

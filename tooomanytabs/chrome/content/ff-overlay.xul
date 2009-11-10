@@ -11,6 +11,12 @@
                         oncommand="tooomanytabs.show_close_old_tabs();"
                         key="tooomanytabs-close-old-tabs-key"
                 />
+                <menuitem label="&tooomanytabs.group_tabs.label;"
+                        oncommand="tooomanytabs.group_tabs();"
+                />
+                <menuitem label="test1"
+                        oncommand="tooomanytabs.test1();"
+                />
             </menupopup>
         </menu>
     </menupopup>
@@ -20,6 +26,16 @@
                 modifiers="control shift" 
                 key="S" 
                 oncommand="tooomanytabs.show_close_old_tabs();"
+        />
+        <key id="tooomanytabs-quickmarks-store-mark-key" 
+                modifiers="control shift" 
+                key="D" 
+                oncommand="tooomanytabs.quickmarks.store_mark();"
+        />
+        <key id="tooomanytabs-quickmarks-run-mark-key" 
+                modifiers="control shift" 
+                key="F" 
+                oncommand="tooomanytabs.quickmarks.run_mark();"
         />
     </keyset>
 

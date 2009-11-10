@@ -4,10 +4,10 @@
     <em:id>tooomanytabs@dunkfordyce.com</em:id>
     <em:type>2</em:type>
     <em:name>Tooo Many Tabs</em:name>
-    <em:version>0.1</em:version>
+    <em:version>0.2</em:version>
     <em:creator>Dunk Fordyce</em:creator>
     <em:contributor></em:contributor>
-    <em:description>Helps close old tabs</em:description>
+    <em:description>Deal with tab overload</em:description>
     <em:aboutURL>chrome://tooomanytabs/content/about.xul</em:aboutURL>
     <!--<em:optionsURL>chrome://tooomanytabs/content/options.xul</em:optionsURL>-->
     <em:targetApplication>

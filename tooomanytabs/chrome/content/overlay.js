@@ -5,7 +5,6 @@ function CCSV(cName, ifaceName)
     return Components.classes[cName].getService(Components.interfaces[ifaceName]);
 }
 
-/*
 function ddd() {
     var cs = CCSV("@mozilla.org/consoleservice;1", "nsIConsoleService");
     cs.logStringMessage(Array.prototype.slice.call(arguments).join(" "));
@@ -22,23 +21,33 @@ function ddlog(msg, obj) {
         ddd(msg, obj, "failed print");
     }
 }
-*/
 
 (function() {
 
-function for_every_tab(func) {
+
+function for_every_window(func) {
     var wm = CCSV("@mozilla.org/appshell/window-mediator;1", "nsIWindowMediator");
     var browserEnumerator = wm.getEnumerator("navigator:browser");
     while (browserEnumerator.hasMoreElements()) {
         browserWin = browserEnumerator.getNext();
-        tabbrowser = browserWin.gBrowser;
-        var numTabs = tabbrowser.browsers.length;
-        for (var index = 0; index < numTabs; index++) {
-            browser = tabbrowser.getBrowserAtIndex(index);
-            tab = tabbrowser.tabContainer.childNodes[index]
-            func(browserWin, tabbrowser, tab, browser);
-        }
+        if( func(browserWin) ) return true;
     }
+};
+
+function for_every_tab_in_browser(browserWin, func) {
+    var tabbrowser = browserWin.gBrowser;
+    var numTabs = tabbrowser.browsers.length;
+    for (var index = 0; index < numTabs; index++) {
+        browser = tabbrowser.getBrowserAtIndex(index);
+        var tab = tabbrowser.tabContainer.childNodes[index]
+        if( func(browserWin, tabbrowser, index, tab, browser) ) return true;
+    }
+};
+
+function for_every_tab(func) {
+    for_every_window(function(browserWin) {
+        if( for_every_tab_in_browser(browserWin, func) ) return true;
+    });
 };
 
 function distanceOfTimeInWords(fromTime, toTime, includeSeconds) {
@@ -103,7 +112,7 @@ tooomanytabs.onLoad = function() {
 
     gBrowser.tabContainer.addEventListener("TabOpen", tooomanytabs.onTabOpen, false);
 
-    for_every_tab(function(browserWin, tabbrowser, tab, browser) {
+    for_every_tab(function(browserWin, tabbrowser, tabidx, tab, browser) {
         new BrowserListener(browser);
     });
 };
@@ -112,9 +121,11 @@ tooomanytabs.onTabOpen = function(event) {
     new BrowserListener(gBrowser.getBrowserForTab(event.target));
 };
 
+
 tooomanytabs.show_close_old_tabs = function(e) {
-    var win = window.open("chrome://tooomanytabs/content/tooomanytabs.xul", 
-                          "Close Old Tabs", "chrome,centerscreen"); 
+    var win = window.openDialog("chrome://tooomanytabs/content/tooomanytabs.xul", 
+                                "Close Old Tabs", "chrome,centerscreen"); 
+
     win.addEventListener('load', function() {
         var tabs = win.document.getElementById('tabs');
 
@@ -123,14 +134,15 @@ tooomanytabs.show_close_old_tabs = function(e) {
 
         var data = [];
 
-        for_every_tab(function(browserWin, tabbrowser, tab, browser) {
+        for_every_tab(function(browserWin, tabbrowser, tabidx, tab, browser) {
             var row = {
                 activity: -1, 
                 activity_str: '',
                 url: browser.currentURI.spec,
                 icon: faviconService.getFaviconImageForPage(browser.currentURI),
                 tabbrowser: tabbrowser,
-                tab: tab
+                tab: tab,
+                title: browser.contentDocument.title
             };
             if( browser.hasAttribute('tooomanytabs_activity') ) {
                 row.activity = parseInt(browser.getAttribute('tooomanytabs_activity'), 10);
@@ -179,7 +191,7 @@ tooomanytabs.show_close_old_tabs = function(e) {
 
         tabs.view = new treeView();
 
-        win.document.getElementById('close-selected').addEventListener('click', 
+        win.addEventListener('dialogaccept', 
             function() {
                 var start = new Object();
                 var end = new Object();
@@ -197,15 +209,90 @@ tooomanytabs.show_close_old_tabs = function(e) {
             false
         );
 
-        win.document.getElementById('cancel').addEventListener('click',
+        /*
+        win.addEventListener('dialogcancel',
             function() {
                 win.close();
             }, 
             false
         );
+        */
 
     }, false);
+
 };
+
+tooomanytabs.group_tabs = function() {
+    /*
+    for_every_window(function(browserWin) {
+
+        for_every_tab_in_browser(browserWin, 
+            function(browserWin, tabbrowser, tabidx, tab, browser) {
+                var uri = browser.currentURI;                   
+                var insert_index = -1;
+                for_every_tab_in_browser(browserWin,
+                    function(_, _, othertabidx, _, otherbrowser) {
+                        var otheruri = otherbrowser.currentURI;
+                        if( otheruri.scheme == uri.scheme && 
+                            otheruri.host == uri.host ) {
+                            insert_index = othertabidx;
+                        } else if( insert_index != -1 ) {
+                            return true;
+                        }
+                    }
+                );
+
+                if( insert_index != -1 ) {
+                    var container = tabbrowser.tabContainer;
+                    if( insert_index + 1 >= container.childNodes.length;
+                    var targettab = container.childNodes[insert_index+1];
+                    tabbrowser.tabContainer.insertBefore(
+                }
+            }
+        );
+    });
+
+    for_every_tab(function(browserWin, tabbrowser, tab, browser) {
+        var uri = browser.currentURI;
+    });
+    */
+};
+
+
+
+(function() {
+    tooomanytabs.quickmarks = {};
+    var qm = tooomanytabs.quickmarks;
+
+    var key_map = {};
+
+    qm.store_mark = function() {
+        ddd('store mark');
+        function get_next(e) {
+            window.removeEventListener('keydown', get_next, true);
+            key_map[e.keyCode] = gBrowser.selectedTab;
+            var n =gBrowser.getNotificationBox(
+                    gBrowser.getBrowserForTab(gBrowser.selectedTab)
+            );
+        }
+
+        window.addEventListener('keydown', get_next, true);
+    };
+
+    qm.run_mark = function() {
+        function get_next(e) {
+            var target = key_map[e.keyCode];
+            if( target ) {
+                gBrowser.selectedTab = target;
+            }
+            window.removeEventListener('keydown', get_next, true);
+        };
+
+        window.addEventListener('keydown', get_next, true);
+    };
+
+})();
+
 
 })();
 

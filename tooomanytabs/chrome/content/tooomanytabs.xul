@@ -1,31 +1,32 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <!-- Extremely recommended to keep this css include!! -->
-<window id="tooomanytabs-close-old-tabs" title="Close Old Tabs"
+<dialog id="tooomanytabs-close-old-tabs" title="Close old tabs..."
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         height="500"
         width="600"
+        buttons="accept,cancel"
         persist="width height screenX screenY"
     >
 
-    <script src="tabswindow.js"/>
-  
     <vbox flex="1">
         <description>Select tabs to close:</description>
 
-       <tree id="tabs" flex="1" rows="1" width="500">  
-         <treecols>  
-           <treecol id="activity_str" label="activity" flex="1" class="sortDirectionIndicator" sortDirection="ascending"/>  
-           <treecol id="url" label="location" flex="1"/>  
-         </treecols>  
+        <tree id="tabs" flex="1" rows="1" width="500" hidecolumnpicker="true">  
+            <treecols>  
+                <treecol id="activity_str" 
+                        label="activity" 
+                        class="sortDirectionIndicator" 
+                        sortDirection="ascending"
+                        width="150"
+                        fixed="false"
+                />  
+                <treecol id="url" label="Location" flex="1"/>  
+                <treecol id="title" label="Title" flex="1"/>  
+            </treecols>  
 
-         <treechildren id="tabs-children"/>
-       </tree>  
-    
-        <hbox>
-            <button id="close-selected" label="Close selected" icon="accept"/>
-            <button id="cancel" label="Cancel" icon="cancel"/>
-        </hbox>
+            <treechildren id="tabs-children"/>
+        </tree>  
     </vbox>
-</window>
+</dialog>
 
