@@ -274,6 +274,13 @@ tooomanytabs.group_tabs = function() {
             var n =gBrowser.getNotificationBox(
                     gBrowser.getBrowserForTab(gBrowser.selectedTab)
             );
+            n.appendNotification(
+                    "Key updated",
+                    "tmtkeyupdate",
+                    null,
+                    n.PRIORITY_INFO_LOW,
+                    null
+            );
         }
 
         window.addEventListener('keydown', get_next, true);
