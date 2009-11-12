@@ -12,17 +12,31 @@
     <vbox flex="1">
         <description>Select tabs to close:</description>
 
-        <tree id="tabs" flex="1" rows="1" width="500" hidecolumnpicker="true">  
+        <tree id="tabs" 
+                flex="1" 
+                enableColumnDrag="true"
+            >  
             <treecols>  
                 <treecol id="activity_str" 
                         label="activity" 
                         class="sortDirectionIndicator" 
                         sortDirection="ascending"
                         width="150"
-                        fixed="false"
+                        flex="1"
+                        persist="width ordinal"
                 />  
-                <treecol id="url" label="Location" flex="1"/>  
-                <treecol id="title" label="Title" flex="1"/>  
+                <splitter class="tree-splitter"/>  
+                <treecol id="url" 
+                        label="Location" 
+                        flex="2" 
+                        persist="width ordinal"
+                />  
+                <splitter class="tree-splitter"/>  
+                <treecol id="title" 
+                        label="Title" 
+                        flex="2" 
+                        persist="width ordinal"
+                />  
             </treecols>  
 
             <treechildren id="tabs-children"/>

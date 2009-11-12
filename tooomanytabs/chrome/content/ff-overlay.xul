@@ -37,6 +37,36 @@
                 key="F" 
                 oncommand="tooomanytabs.quickmarks.run_mark();"
         />
+        <key id="tooomanytabs-filter-key"
+                modifiers="control shift"
+                key="M"
+                oncommand="tooomanytabs.filter.open_search();"
+        />
     </keyset>
+
+
+    <statusbar id="status-bar">
+        <statusbarpanel id="tooomanytabs-filter-panel" 
+                context="tooomanytabs-filter-panel-context" 
+                >
+            <label id="tooomanytabs-filter-label" value="" hidden="false"/>
+            <textbox id="tooomanytabs-filter-textbox" 
+                    value="" 
+                    hidden="true"
+                    type="search"
+                    oncommand="tooomanytabs.filter.filter(this.value)"
+                    onblur="tooomanytabs.filter.close_search()"
+                    onkeydown="tooomanytabs.filter.keydown(event)"
+                    class="plain"
+                    style="background-color: #fff;"
+            />
+        </statusbarpanel>
+
+        <menupopup id="tooomanytabs-filter-context">
+            <menuitem label="clear" />
+        </menupopup>
+    </statusbar>
+
+
 
 </overlay>

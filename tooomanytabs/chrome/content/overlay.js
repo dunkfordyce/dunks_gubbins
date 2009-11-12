@@ -24,10 +24,10 @@ function ddlog(msg, obj) {
 
 (function() {
 
-
 function for_every_window(func) {
     var wm = CCSV("@mozilla.org/appshell/window-mediator;1", "nsIWindowMediator");
     var browserEnumerator = wm.getEnumerator("navigator:browser");
+    var browserWin;
     while (browserEnumerator.hasMoreElements()) {
         browserWin = browserEnumerator.getNext();
         if( func(browserWin) ) return true;
@@ -37,9 +37,10 @@ function for_every_window(func) {
 function for_every_tab_in_browser(browserWin, func) {
     var tabbrowser = browserWin.gBrowser;
     var numTabs = tabbrowser.browsers.length;
+    var browser, tab;
     for (var index = 0; index < numTabs; index++) {
         browser = tabbrowser.getBrowserAtIndex(index);
-        var tab = tabbrowser.tabContainer.childNodes[index]
+        tab = tabbrowser.tabContainer.childNodes[index]
         if( func(browserWin, tabbrowser, index, tab, browser) ) return true;
     }
 };
@@ -115,6 +116,8 @@ tooomanytabs.onLoad = function() {
     for_every_tab(function(browserWin, tabbrowser, tabidx, tab, browser) {
         new BrowserListener(browser);
     });
+
+    tooomanytabs.filter.init();
 };
 
 tooomanytabs.onTabOpen = function(event) {
@@ -209,15 +212,6 @@ tooomanytabs.show_close_old_tabs = function(e) {
             false
         );
 
-        /*
-        win.addEventListener('dialogcancel',
-            function() {
-                win.close();
-            }, 
-            false
-        );
-        */
-
     }, false);
 
 };
@@ -267,20 +261,22 @@ tooomanytabs.group_tabs = function() {
     var key_map = {};
 
     qm.store_mark = function() {
-        ddd('store mark');
         function get_next(e) {
             window.removeEventListener('keydown', get_next, true);
             key_map[e.keyCode] = gBrowser.selectedTab;
             var n =gBrowser.getNotificationBox(
                     gBrowser.getBrowserForTab(gBrowser.selectedTab)
             );
-            n.appendNotification(
-                    "Key updated",
+            var note = n.appendNotification(
+                    "Key set to '"+e.keyCode+"'",
                     "tmtkeyupdate",
                     null,
                     n.PRIORITY_INFO_LOW,
                     null
             );
+            window.setTimeout(function() {
+                n.removeNotification(note);
+            }, 2000);
         }
 
         window.addEventListener('keydown', get_next, true);
@@ -296,6 +292,67 @@ tooomanytabs.group_tabs = function() {
         };
 
         window.addEventListener('keydown', get_next, true);
+    };
+
+})();
+
+
+(function() {
+    tooomanytabs.filter = {};
+    var filter = tooomanytabs.filter;
+
+    var $label, $textbox;
+    var filtering = false;
+
+    filter.init = function() {
+        $label   = document.getElementById('tooomanytabs-filter-label');
+        $textbox = document.getElementById('tooomanytabs-filter-textbox');
+    };
+
+    filter.open_search = function() {
+        $textbox.hidden = false;
+        $label.hidden = true;
+        $textbox.focus();
+    };
+
+    filter.close_search = function() {
+        if( filtering ) {
+            return;
+        }
+        $textbox.hidden = true;
+        $textbox.value = '';
+        $label.hidden = false;
+        for_every_tab_in_browser(window, function(_, _, _, tab, _) { 
+            tab.hidden = false;
+        });
+    };
+
+    filter.keydown = function(e) {
+        if( e.keyCode == 13 || e.keyCode == 27 ) {
+            filter.close_search();
+        }
+    };
+
+    filter.filter = function(value) {
+        value = value.toLowerCase();
+
+        var selected_one = false;
+
+        for_every_tab_in_browser(window, function(_a, tabbrowser, _b, tab, browser) {
+            if( browser.currentURI.spec.toLowerCase().indexOf(value) != -1 ||
+                browser.contentDocument.title.toLowerCase().indexOf(value) != -1) {
+                tab.hidden = false;
+                if( !selected_one ) {
+                    filtering = true;
+                    selected_one = true;
+                    tabbrowser.selectedTab = tab;
+                    $textbox.focus();
+                    filtering = false;
+                }
+            } else { 
+                tab.hidden = true;
+            }
+        });
     };
 
 })();
