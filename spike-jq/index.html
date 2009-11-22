@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+	<title>org.mongrove.flower</title>
+
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<!--script type="text/javascript" src="js/jquery-ui-1.7.2.js"></script-->
+	<script type="text/javascript" src="js/jquery.ui.all.js"></script>
+	<script type="text/javascript" src="js/jquery.layout.js"></script>
+
+	<script type="text/javascript" src="js/flower.js"></script>
+	<!--script type="text/javascript" src="js/flower.widgets.js"></script-->
+	<!--script type="text/javascript" src="js/flower.dashboard.js"></script-->
+
+    <script type="text/javascript" src="example.json"></script>
+
+	<script type="text/javascript">
+    $(document).ready(function() {
+        flower.init([
+            'dashboard'
+        ]);
+    });
+    </script>
+
+
+    <link rel="stylesheet" href="css/dot-luv/jquery-ui-1.7.2.custom.css"/>
+	<style type="text/css">
+    * {
+        font-size: 12px;
+        font-family: sans;
+    }
+
+	.ui-layout-resizer { /* all 'resizer-bars' */ 
+		background: #DDD; 
+	} 
+
+	.ui-layout-toggler { /* all 'toggler-buttons' */ 
+		background: #AAA; 
+	} 
+
+    .ui-layout-north h1 { 
+        font-size: 30px;
+    }
+
+    .ui-layout-west {
+        display: none;
+        padding: 0px;
+        margin: 0px;
+    }
+	</style>
+</head>
+<body>
+
+    <div class="ui-layout-north">
+        <h1 class="ui-state-default ui-helper-reset">org.mongrove.flower</h1>
+    </div>
+
+    <div class="ui-layout-west">
+    </div>
+
+    <div class="ui-layout-center">
+        <ul></ul>
+        <div class="ui-layout-content"></div>
+    </div>
+
+</body>
+</html>

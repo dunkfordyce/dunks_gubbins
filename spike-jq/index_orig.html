@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+	<title>Simple Layout Demo</title>
+
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery.ui.all.js"></script>
+	<script type="text/javascript" src="js/jquery.layout.js"></script>
+
+	<script type="text/javascript" src="flower.js"></script>
+	<script type="text/javascript" src="flower.pane.js"></script>
+	<script type="text/javascript" src="flower.dashboard.js"></script>
+    <script type="text/javascript" src="example.json"></script>
+
+	<script type="text/javascript">
+
+	var myLayout; // a var is required because this page utilizes: myLayout.allowOverflow() method
+
+	$(document).ready(function () {
+        myLayout = $('body').layout({
+            west: {
+                size:         300,
+                // RESIZE Accordion widget when panes resize
+                onresize:     function () { $("#accordion1").accordion("resize"); }
+            },
+
+            north: {
+                spacing_open:           1           // cosmetic spacing
+            ,   togglerLength_open:     0           // HIDE the toggler button
+            ,   togglerLength_closed:   -1          // "100%" OR -1 = full width of pane
+            ,   resizable:              false
+            ,   slidable:               false
+            //  override default effect
+            ,   fxName:                 "none"
+            }
+
+        });
+
+
+        // ACCORDION - in the West pane
+        $("#accordion1").accordion({
+            fillSpace:  true
+        });
+
+        $(".ui-layout-center")
+            .tabs()
+            .find(".ui-tabs-nav")
+                .sortable({ axis: 'x', zIndex: 2 })
+        ;
+
+        $('.services > div').draggable({helper: 'clone', appendTo: 'body'}); //{helper:'clone', appendTo: 'body', containment: 'window'});
+        $('#tabs-west-1').droppable({
+            drop: function(event, ui) { 
+                if( !ui.draggable.hasClass('service') ) { return; }
+
+                var newwin = ($('<div/>')
+                    .attr('title', ui.draggable.text())
+                );
+                var pos = ui.helper.position();
+                newwin.dialog({
+                    height: 140,
+                    modal:false, 
+                    position: [pos.left, pos.top],
+                }).parents('[role=dialog]').appendTo('#tabs-west-1');
+                ui.helper.remove();
+            }
+        });
+
+        $("#dialog").dialog({
+            //bgiframe: true,
+            height: 140,
+            modal:false, 
+        }).parents('[role=dialog]').appendTo('#tabs-west-1');
+
+        $("#dialog2").dialog({
+            //bgiframe: true,
+            height: 140,
+            modal:false, 
+        }).parents('[role=dialog]').appendTo('#tabs-west-1');
+
+    });
+
+	</script>
+
+
+	<style type="text/css">
+    * {
+        font-size: 12px;
+        font-family: sans;
+    }
+
+
+    .ui-draggable {
+        z-index: 1000;
+    }
+	.ui-layout-pane { /* all 'panes' */ 
+		background: #FFF; 
+		border: 1px solid #BBB; 
+		padding: 0px; 
+		overflow: auto;
+	} 
+
+	.ui-layout-resizer { /* all 'resizer-bars' */ 
+		background: #DDD; 
+	} 
+
+	.ui-layout-toggler { /* all 'toggler-buttons' */ 
+		background: #AAA; 
+	} 
+
+    div.grid {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    div.service {
+        display: block;
+        border: 1px solid white;
+        height: 80px;
+        width: 80px;
+        clear: none;
+        float: left;
+        margin: 2px;
+        background: black;
+    }
+
+	</style>
+
+    <link rel="stylesheet" href="css/dot-luv/jquery-ui-1.7.2.custom.css"/>
+
+</head>
+<body>
+
+<!-- manually attach allowOverflow method to pane -->
+<div class="ui-layout-north" onmouseover="myLayout.allowOverflow('north')" onmouseout="myLayout.resetOverflow(this)">
+    <h1 class="ui-state-default ui-helper-reset" style="font-size:30px">org.mongrove.flower</h1>
+</div>
+
+<!-- allowOverflow auto-attached by option: west__showOverflowOnHover = true -->
+<div class="ui-layout-west" style="display: none; padding: 0x; margin:0px;">
+    <div id="accordion1">
+
+            <h3><a href="#">Services</a></h3>
+            <div style="padding: 5px;">
+                <div class="services grid">    
+                    <div class="service">one</div>
+                    <div class="service">two</div>
+                    <div class="service">three</div>
+                    <div class="service">four</div>
+                    <div class="service">one</div>
+                    <div class="service">two</div>
+                    <div class="service">three</div>
+                    <div class="service">four</div>
+                    <div class="service">one</div>
+                    <div class="service">two</div>
+                    <div class="service">three</div>
+                    <div class="service">four</div>
+                    <div class="service">one</div>
+                    <div class="service">two</div>
+                    <div class="service">three</div>
+                    <div class="service">four</div>
+                    <div class="service">one</div>
+                    <div class="service">two</div>
+                    <div class="service">three</div>
+                    <div class="service">four</div>
+                </div>
+            </div>
+
+            <h3><a href="#">Widgets</a></h3>
+            <div>
+                <p style="font-weight: bold;">Sed Non Urna</p>
+
+                <p>Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus.
+                    Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit,
+                    faucibus interdum tellus libero ac justo.</p>
+                <p>Vivamus non quam. In suscipit faucibus urna.</p>
+            </div>
+
+    </div>
+
+
+</div>
+
+<div class="ui-layout-center">
+    <UL>
+        <LI><A href="#tabs-west-1">Nunc tincidunt</A></LI>
+        <LI><A href="#tabs-west-2">Proin dolor</A></LI>
+        <LI><A href="#tabs-west-3">Aenean lacinia</A></LI>
+    </UL>
+    <!-- add wrapper that Layout will auto-size to 'fill space' -->
+    <DIV class="ui-layout-content">
+
+        <DIV id="tabs-west-1" style="height: 100%; padding:0px; position: relative;">
+            <div id="dialog" title="Basic modal dialog">
+                <p>Adding the modal overlay screen makes the dialog look more prominent because it dims out the page content.</p>
+            </div>
+            <div id="dialog2" title="Basic modal dialog">
+                <p>Adding the modal overlay screen makes the dialog look more prominent because it dims out the page content.</p>
+            </div>
+        </DIV>
+        <DIV id="tabs-west-2">
+        </DIV>
+
+        <DIV id="tabs-west-3">
+        </DIV>
+    </DIV><!--- END content-body --->
+    <!--
+    <DIV class="ui-state-default" style="padding: 3px 5px 5px; text-align: center;"
+    onMouseOver="$(this).addClass('ui-state-hover')" onMouseOut="$(this).removeClass('ui-state-hover')">
+        Footer for the West-pane
+    </DIV>
+    -->
+
+
+</div>
+
+
+</body>
+</html>

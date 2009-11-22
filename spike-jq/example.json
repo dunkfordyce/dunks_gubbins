@@ -1,0 +1,115 @@
+
+// Retrieving the "dashboard" object will tell you how to draw the
+// dashboard. I've organized the things with "panes" so if we want to
+// add a right top or bottom one later the data format already
+// supports it.
+
+var exdata = {
+
+ "dashboard": {
+    "name" : "mydashboard",
+    "creator" : "spike",
+    "theme" : "mytheme",
+    "created" : "20091118195611",
+     "panes" : {
+        // any object appearing in a pane is an object to render
+        "west" : {
+            "title" : "Left Panel",
+            // whenever an item is created its type + date/timestamp
+            // is used to make up a unique name which you can then
+            // look up as an object
+            "items" : [
+                "accordion20091118232649"
+            ]
+        },
+        "center" : {
+            "title" : "Center Panel",
+            "tabs" : [
+                "tab20091118232831",
+                "tab20091118232850"
+            ]
+        }
+    }
+ },
+
+ "accordion20091118232649" : {
+    type: 'accordion',
+    items: {
+        // each first level object is an item in the accordion and the
+        // text to be displayed is the key of the object
+        "Main Menu" : ['menuliststatic', {
+            "type": "linklist",
+            "items" : [
+                // key is the test to be displayed and the value to build
+                // the url
+                ["Services", "/services"],
+                ["Hosts", "/hosts"],
+                ["Problems", "/problems"],
+                ["Help", "/help"]
+            ]
+        }],
+        "Widgets" : ['widgetsliststatic', {
+            "type" : "iconlist",
+            "items_url" : "/widgets/listall" // this will return the json
+                                         // snippet below
+        }]
+    }
+ },
+
+ "widgets" : [
+    {
+        title: 'calendar',
+        "icon" : "calendar.png",
+        // this defines what js to load when the widged is dropped in
+        // the workspace
+        "code" : "jquery-calendar.js",
+        // this might not be useful but in case defines what function
+        // to call to initialize the widget
+        "init" : "someFunction()"
+    },
+    {   
+        title: "rss",
+        "icon" : "rss.png",
+        "code" : "jquery-rss.js",
+        "init" : "readRss()"
+    }
+ ],
+
+ "tab20091118232831" : {
+    type: 'tab',
+    // what to display on the tab
+    "label" : "Tab Number One",
+    // list of widgets contained in that tab
+    "windows" : [
+        ["calendar20091119001220" , {
+            "type" : "calendar",
+            "left" : 50,
+            "top" : 50,
+            "width" : 200,
+            "heigth" : 300,
+            "scrollbar" : false,
+            "settings" : {
+                "date" : "2008-07-15",
+                "view" : "week"
+            }
+        }],
+        ["rss20091119001647" , {
+            "type" : "rss",
+            "left" : 300,
+            "top" : 50,
+            "width" : 200,
+            "heigth" : 500,
+            "scrollbar" : true,
+            "settings" : {
+                "url" : "http://some/url/atom.rss"
+            }
+        }]
+    ]
+ },
+
+ "tab20091118232850" : {
+    type: 'tab',
+    "label" : "Tab number Two",
+    //...
+ }
+};
