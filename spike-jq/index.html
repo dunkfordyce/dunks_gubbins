@@ -16,6 +16,20 @@
     <script type="text/javascript" src="example.json"></script>
 
 	<script type="text/javascript">
+    // override jquery getJSON with something to get from the example json
+    // its pretty dumb... takes the last part of the url and uses that 
+    // as an attribute name off exdata
+    $.getJSON = (function(orig) {
+        return( function() {
+            var url = arguments[0];
+            var cb = arguments[arguments.length-1];
+            var parts = url.split('/');
+            var name = parts.length > 1 ? parts[parts.length - 2] : parts[0];
+            console.log('fake getJSON', url, name);
+            cb(exdata[name]);
+        });
+    })($.getJSON);
+
     $(document).ready(function() {
         flower.init([
             'dashboard'

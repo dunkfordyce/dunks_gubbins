@@ -1,5 +1,6 @@
 flower.require('widgets', function() {
 flower.ns('dashboard', function() {
+var m = this;
 
 // module initialization
 this.init = function() {
@@ -18,7 +19,9 @@ this.init = function() {
     });
 
     // temp loading from example data
-    this.load(exdata.dashboard);
+    $.getJSON('dashboard', function(data) { 
+        m.load(data);
+    });
 };
 
 // load a dashboard from `data`

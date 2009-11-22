@@ -1,4 +1,5 @@
 flower.ns('widgets', function() {
+var m = this;
 
 /*
 load a new widget appending content to $parent
@@ -7,38 +8,33 @@ if id_or_obj is an array like [widget_id, {...}] data is loaded from the object
 */
 this.load = flower.logfunc('widget load', 
 function(id_or_obj, $parent, cb) {
-    var data, id;
-    // if its an obj then the data is inline - we can just use that 
-    if( typeof id_or_obj == "object" ) {
-        id = id_or_obj[0];
-        data = id_or_obj[1];
-    // string id - we should load it 
-    } else { 
-        id = id_or_obj;
-        // this should be some $.getJSON call
-        // just use the example json for the moment 
-        data = exdata[id];
-        if( typeof data == 'undefined' ) {
-            console.warn('data for widget id', id, 'not found');
+    function load_it(id, data) { 
+        // cant load a widget without a type 
+        if( !data.type ) {
+            console.warn('data has no type!', id);
             return;
         }
+
+        // check we have code to create the widget - could ajax in new 
+        // code here if we dont know about it yet ...
+        var creator = m.factory[data.type];
+        if( !creator ) {
+            console.warn('unknown widget type', data.type, id);
+        } else {
+            // finally create whatever it is 
+            creator(id, $parent, data);
+        }
+    }
+    // if its an obj then the data is inline - we can just use that 
+    if( typeof id_or_obj == "object" ) {
+        load_it(id_or_obj[0], id_or_obj[1]);
+    // string id - we should load it async
+    } else { 
+        $.getJSON(id_or_obj, function(data) { 
+            load_it(id_or_obj, data);
+        });
     }       
 
-    // cant load a widget without a type 
-    if( !data.type ) {
-        console.warn('data has no type!', id);
-        return;
-    }
-
-    // check we have code to create the widget - could ajax in new 
-    // code here if we dont know about it yet ...
-    var creator = this.factory[data.type];
-    if( !creator ) {
-        console.warn('unknown widget type', data.type, id);
-    } else {
-        // finally create whatever it is 
-        creator(id, $parent, data);
-    }
 });
 
 // there should be a func off here for every widget type
@@ -46,6 +42,7 @@ function(id_or_obj, $parent, cb) {
 // extend the widgets that can be created
 // could also dynamicly load stuff into here 
 this.ns('factory', function() {
+    // create an accordion widget 
     this.accordion = flower.logfunc('create accordion',
     function(id, $parent, data) {
         var $el = ($('<div/>')
@@ -64,6 +61,7 @@ this.ns('factory', function() {
         });
     });
 
+    // create a list of links 
     this.linklist = flower.logfunc('create linklist',
     function(id, $parent, data) {
         var $ul = $('<ul/>').appendTo($parent);
@@ -78,21 +76,22 @@ this.ns('factory', function() {
         });
     });
 
+    // create a list of icons 
     this.iconlist = flower.logfunc('create iconlist',
     function(id, $parent, data) {
         var $div = $('<div/>').appendTo($parent);
+        // if items_url is set we grab the items from some location
         if( data.items_url ) {
-            // just get the data from the example for the moment..
-            var items = exdata.widgets;    
-            //$.getJSON(data.items_url, null, function(items) {
-            $.each(items, function(idx, item) {
-                ($('<div/>')
-                    .text(item.title)
-                    .appendTo($div)
-                    .append($('<img/>')
-                        .attr('src', item.icon)
-                    )
-                );
+            $.getJSON('widgets', function(items) {
+                $.each(items, function(idx, item) {
+                    ($('<div/>')
+                        .text(item.title)
+                        .appendTo($div)
+                        .append($('<img/>')
+                            .attr('src', item.icon)
+                        )
+                    );
+                });
             });
             //});
         } else {
@@ -100,6 +99,7 @@ this.ns('factory', function() {
         }
     });
 
+    // create a tab 
     this.tab = flower.logfunc('create tab', 
     function(id, $parent, data) {
         var $tab_body = ($('<div/>')
@@ -116,8 +116,10 @@ this.ns('factory', function() {
         }
     });
 
+    // create a calendar widget
     this.calendar = flower.logfunc('create calendar', 
     function(id, $parent, data) {
+        // dumb way to hack in dialogs 
         ($('<div/>')
             .attr('title', 'Calendar')
             .dialog({
@@ -126,13 +128,16 @@ this.ns('factory', function() {
                 position: [data.left, data.top],
                 modal: false
             })
+            // fix the parenting because there is no other way...
             .parents('[role=dialog]')
             .appendTo($parent)
         );
     });
 
+    // create an rss widget 
     this.rss = flower.logfunc('create rss',
     function(id, $parent, data) {
+        // dumb way to hack in dialogs 
         ($('<div/>')
             .attr('title', 'RSS')
             .dialog({
@@ -141,6 +146,7 @@ this.ns('factory', function() {
                 position: [data.left, data.top],
                 modal: false
             })
+            // fix the parenting because there is no other way...
             .parents('[role=dialog]')
             .appendTo($parent)
         );
