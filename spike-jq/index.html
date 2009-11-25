@@ -8,6 +8,7 @@
 	<!--script type="text/javascript" src="js/jquery-ui-1.7.2.js"></script-->
 	<script type="text/javascript" src="js/jquery.ui.all.js"></script>
 	<script type="text/javascript" src="js/jquery.layout.js"></script>
+	<script type="text/javascript" src="js/flower.jq.win.js"></script>
 
 	<script type="text/javascript" src="js/flower.js"></script>
 	<!--script type="text/javascript" src="js/flower.widgets.js"></script-->
@@ -62,6 +63,24 @@
         padding: 0px;
         margin: 0px;
     }
+
+    #tabs {
+        z-index: 5000;
+    }
+
+    /* 
+    need some way to make the tab the correct size for the space
+    so containment works 
+    */
+    .ui-layout-center .ui-tabs-panel {
+        position:absolute;
+        /* bleh - this is the height of the tabs */
+        top:38px;
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+        padding: 1px;
+    }
 	</style>
 </head>
 <body>
@@ -74,8 +93,9 @@
     </div>
 
     <div class="ui-layout-center">
-        <ul></ul>
-        <div class="ui-layout-content"></div>
+        <div class="ui-layout-content">
+            <ul id="tabs"></ul>
+        </div>
     </div>
 
 </body>

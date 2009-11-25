@@ -107,7 +107,7 @@ this.ns('factory', function() {
             .appendTo($parent.find('.ui-layout-content'))
         );
 
-        $parent.tabs('add', '#'+id, data.label);
+        $parent.find('.ui-layout-content').tabs('add', '#'+id, data.label);
 
         if( data.windows && data.windows.length ) {
             $.each(data.windows, function(idx, win) {
@@ -122,15 +122,16 @@ this.ns('factory', function() {
         // dumb way to hack in dialogs 
         ($('<div/>')
             .attr('title', 'Calendar')
-            .dialog({
+            .win({
                 height: data.height,
                 width: data.width,
                 position: [data.left, data.top],
-                modal: false
+                modal: false,
+                appendTo: $parent
             })
             // fix the parenting because there is no other way...
-            .parents('[role=dialog]')
-            .appendTo($parent)
+            //.parents('[role=dialog]')
+            //.appendTo($parent)
         );
     });
 
@@ -140,15 +141,16 @@ this.ns('factory', function() {
         // dumb way to hack in dialogs 
         ($('<div/>')
             .attr('title', 'RSS')
-            .dialog({
+            .win({
                 height: data.height,
                 width: data.width,
                 position: [data.left, data.top],
-                modal: false
+                modal: false,
+                appendTo: $parent
             })
             // fix the parenting because there is no other way...
-            .parents('[role=dialog]')
-            .appendTo($parent)
+            //.parents('[role=dialog]')
+            //.appendTo($parent)
         );
     });
 });

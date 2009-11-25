@@ -57,7 +57,7 @@ this.load = flower.logfunc('dashboard load', function(data) {
 
 this.ns('pane_loaders', function() {
     this.center = function(pane, data) {
-        pane.$element.tabs();
+        pane.$element.find('.ui-layout-content').tabs();
 
         $.each(data.tabs, function(idx, id) {
             flower.widgets.load(id, pane.$element);
