@@ -5,12 +5,17 @@
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         height="500"
         width="600"
-        buttons="accept,cancel"
+        buttons="accept,cancel,extra1"
         persist="width height screenX screenY"
+        buttonlabelaccept="Select"
+        buttonlabelextra1="Close selected"
     >
 
     <vbox flex="1">
-        <description>Select tabs to close:</description>
+        <textbox id="filter"
+            value=""
+            type="search"
+        />
 
         <tree id="tabs" 
                 flex="1" 
