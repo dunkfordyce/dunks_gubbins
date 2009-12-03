@@ -1,0 +1,17 @@
+@import url(chrome://global/skin/);
+
+#tcloud { 
+    background: #501;
+}
+
+#tcloud-inner > div {
+    color: #aaa;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#tcloud-inner > div:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+

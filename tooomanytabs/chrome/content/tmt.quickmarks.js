@@ -7,19 +7,9 @@ qm.store_mark = function() {
     function get_next(e) {
         window.removeEventListener('keydown', get_next, true);
         key_map[e.keyCode] = gBrowser.selectedTab;
-        var n =gBrowser.getNotificationBox(
-                gBrowser.getBrowserForTab(gBrowser.selectedTab)
+        tooomanytabs.util.notification(
+                "Key set to '"+e.keyCode+"'"
         );
-        var note = n.appendNotification(
-                "Key set to '"+e.keyCode+"'",
-                "tmtkeyupdate",
-                null,
-                n.PRIORITY_INFO_LOW,
-                null
-        );
-        window.setTimeout(function() {
-            n.removeNotification(note);
-        }, 2000);
     }
 
     window.addEventListener('keydown', get_next, true);

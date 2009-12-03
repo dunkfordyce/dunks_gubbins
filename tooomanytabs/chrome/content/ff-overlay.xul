@@ -2,11 +2,21 @@
 <?xml-stylesheet href="chrome://tooomanytabs/skin/overlay.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://tooomanytabs/locale/overlay.dtd">
 <overlay id="tooomanytabs-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <script src="sizzle.js"/>
+    <script src="io.js"/>
+
     <script src="tmt.js"/>
+
+    <script src="vapourword.js"/>
+    <script src="vapourword.html.js"/>
+
+    <script src="tmt.util.js"/>
     <script src="tmt.activity.js"/>
     <script src="tmt.quickmarks.js"/>
     <script src="tmt.filter.js"/>
     <script src="tmt.fasttags.js"/>
+    <script src="tmt.tagcloud.js"/>
+    <script src="tmt.debug.js"/>
 
     <script type="text/javascript">
         window.addEventListener("load", tooomanytabs.init, false);
@@ -22,15 +32,29 @@
                 <menuitem label="&tooomanytabs.group_tabs.label;"
                         oncommand="tooomanytabs.group_tabs();"
                 />
-                <menuitem label="test1"
-                        oncommand="tooomanytabs.test1();"
+                <menuitem label="Tag cloud..."
+                        oncommand="tooomanytabs.tagcloud.show();"
+                />
+                <menuitem label="Auto tag"
+                        oncommand="tooomanytabs.fasttags.autotag();"
+                        key="tooomanytabs-autotag-key"
+                />
+                <menuitem label="Create test tags"
+                        oncommand="tooomanytabs.debug.create_test_tags();"
                 />
             </menupopup>
         </menu>
     </menupopup>
 
     <popup id="contentAreaContextMenu">
-        <menuitem id="tooomanytabs-tag-this" label="Tag this page" oncommand="tooomanytabs.fasttags.tag_selection();"/>
+        <menu label="Tag">
+            <menupopup id="tooomanytabs-tag-popup">
+            </menupopup>
+        </menu>
+        <menuitem label="Auto tag"
+            oncommand="tooomanytabs.fasttags.autotag();"
+            key="tooomanytabs-autotag-key"
+        />
     </popup>
 
 
@@ -54,6 +78,11 @@
                 modifiers="control shift"
                 key="M"
                 oncommand="tooomanytabs.filter.open_search();"
+        />
+        <key id="tooomanytabs-autotag-key"
+                modifiers="control shift"
+                key="A"
+                oncommand="tooomanytabs.fasttags.autotag();"
         />
     </keyset>
 

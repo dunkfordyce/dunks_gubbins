@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://tooomanytabs/skin/tagcloud.css" type="text/css"?>
+<?xml-stylesheet href="chrome://browser/content/places/places.css" ?>  
+<?xul-overlay href="chrome://browser/content/places/placesOverlay.xul" ?>  
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:svg="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+    >
+    <hbox flex="1">
+        <tree id="results" type="places" style="min-width: 200px;">  
+          <treecols>  
+            <treecol id="title" label="Bookmarks" flex="1" primary="true" />  
+          </treecols>  
+          <treechildren />  
+        </tree>  
+
+        <html:div style="position: relative" id="tcloud" flex="3">
+            <html:div style="position: relative" id="tcloud-inner">
+            </html:div>
+        </html:div>
+    </hbox>
+</window>
+
+

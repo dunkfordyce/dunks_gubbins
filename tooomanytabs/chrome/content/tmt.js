@@ -1,6 +1,5 @@
 var tooomanytabs = {};
 
-
 function CCSV(cName, ifaceName)
 {
     return Components.classes[cName].getService(Components.interfaces[ifaceName]);
@@ -34,12 +33,16 @@ function ddfunc(f) {
 }
 
 
+
+
+try { 
 (function(tmt) { 
+
 
 var to_init = [];
 
 tmt.ns = function(name, code) {
-    var s = tmt[name] = {};
+    var s = tmt[name] = { }; 
     try { 
         code.apply(s);
     } catch(e) {
@@ -50,6 +53,44 @@ tmt.ns = function(name, code) {
     } 
 };
 
+/*
+if(0) {
+function _imp(name) {
+    var parts = name.split('.');
+    var o = window;
+    while( parts.length ) {
+        
+    }
+};
+
+tmt.ns = function() {
+    var name = arguments[0], opts, code;
+    if( arguments.length == 2 ) {
+        code = arguments[1];
+        opts = {};
+    } else if( arguments.length == 3 ) {
+        opts = arguments[1];
+        code = arguments[2];
+    }
+    
+    nso = {};
+    if( opts.imports && opts.imports.length ) {
+        opts.imports.forEach(function(name) {
+
+        });
+    }
+    
+};
+}
+*/
+
+tmt.prefs = function(name) {
+    return (
+        CCSV("@mozilla.org/preferences-service;1", 'nsIPrefService')
+        .getBranch("extensions.tooomanytabs."+name+'.')
+    );
+};
+
 tmt.init = function() {
     to_init.forEach(function(s) {
         s.init();
@@ -57,3 +98,7 @@ tmt.init = function() {
 };
 
 })(tooomanytabs);
+} catch(e) {
+ddd('failing tmt!', e);
+}
+ddd('done tmt');
