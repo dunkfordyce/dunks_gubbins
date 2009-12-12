@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+    onload="go();"
+>
+
+<defs id="d">
+    <linearGradient id="cloudgrad"
+        x1="0.5" y1="0"
+        x2="0.8" y2="1"
+        gradientUnits="objectBoundingBox"
+    >
+        <stop offset="0" stop-color="#ddd"/>
+        <stop offset="0.8" stop-color="#ccc"/>
+        <stop offset="1" stop-color="#666"/>
+    </linearGradient>
+</defs>
+
+<style type="text/css">
+    svg {
+        background: -moz-linear-gradient(#66f, #ccf) no-repeat;
+    }
+</style>
+
+<script type="text/javascript">
+function ddd() {
+    console.log('ddd', arguments);
+}
+var ddlog = ddd;
+console.log('here');
+</script>
+<script xlink:href="vapourword.js" type="text/javascript"></script>
+<script xlink:href="vapourword.svg.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+// <![CDATA[
+var items = [
+    ['python', 100],
+    ['programming', 50],
+    ['blah', 20],
+    ['moreblah', 20],
+    ['emily', 200],
+    ['duncan', 150]
+];
+
+var items=[["Python", 206], ["http", 52], ["org", 50], ["python", 46], ["Retrieved", 43], ["language", 40], ["code", 35], ["The", 33], ["Foundation", 29], ["www", 28], ["s", 28], ["programming", 26], ["2", 23], ["11", 23], ["3", 23], ["24", 23], ["2008", 23], ["languages", 23], ["C", 23], ["CPython", 22], ["com", 20], ["edit", 19], ["software", 18], ["0", 17], ["standard", 16], ["html", 16], ["2009", 16], ["use", 16], ["used", 15], ["object", 15], ["4", 15], ["5", 15], ["number", 15], ["Software", 15], ["library", 14], ["block", 13], ["Rossum", 13], ["such", 11], ["PEP", 11], ["Guido", 11], ["27", 11], ["statement", 11], ["development", 11], ["An", 11], ["philosophy", 11], ["example", 10], ["03", 10], ["modules", 10], ["1", 10], ["using", 10], ["design", 10], ["uses", 10], ["2007", 10], ["including", 10], ["Wikipedia", 10], ["written", 9], ["features", 9], ["syntax", 9], ["Free", 9], ["06", 9], ["version", 9], ["dev", 9], ["Java", 9], ["van", 9], ["classes", 8], ["oriented", 8], ["implementation", 8], ["method", 8], ["o", 8], ["releases", 8], ["semantics", 8], ["Linux", 8], ["style", 8], ["21", 8], ["system", 8], ["new", 7], ["types", 7], ["doc", 7], ["release", 7], ["several", 7], ["implementations", 7], ["Perl", 7], ["general", 7], ["6", 7], ["more", 7], ["It", 7], ["9", 7], ["2006", 7], ["tools", 7], ["interpreter", 7], ["dynamic", 6], ["indentation", 6], ["type", 6], ["writing", 6], ["support", 6], ["applications", 6], ["platform", 6], ["one", 6], ["peps", 6], ["immutable", 6], ["large", 6], ["major", 6], ["self", 6], ["8", 6], ["PyPy", 6], ["source", 6], ["pep", 6], ["run", 6], ["names", 6], ["This", 6], ["class", 6], ["well", 6], ["However", 6], ["Sugar", 5], ["bytecode", 5], ["net", 5], ["typed", 5], ["Search", 5], ["approach", 5], ["developers", 5], ["string", 5], ["True", 5], ["released", 5], ["History", 5], ["12", 5], ["Main", 5], ["article", 5], ["many", 5], ["Open", 5], ["GNU", 5], ["speed", 5], ["program", 5], ["faq", 5], ["List", 5], ["What", 5], ["22", 5], ["29", 5], ["7", 5], ["programmers", 5], ["Wikimedia", 5], ["generators", 5], ["Psyco", 5], ["community", 5], ["FAQ", 5], ["About", 5], ["OS", 5], ["similar", 5], ["application", 5], ["iterators", 5], ["e", 5], ["include", 5], ["related", 5], ["Development", 5], ["Some", 5], ["web", 5], ["Stackless", 5], ["functional", 5], ["Apache", 4], ["incremented", 4], ["feature", 4], ["A", 4], ["reference", 4], ["08", 4], ["packages", 4], ["variable", 4], ["time", 4], ["License", 4], ["data", 4], ["statements", 4], ["place", 4], ["open", 4], ["10", 4], ["15", 4], ["16", 4], ["18", 4], ["Web", 4], ["show", 4], ["wiki", 4], ["between", 4], ["60", 4], ["Tcl", 4], ["In", 4], ["Ruby", 4], ["Van", 4], ["list", 4], ["information", 4], ["Lisp", 4], ["20", 4], ["compiling", 4], ["part", 4], ["b", 4], ["Help", 4], ["available", 4], ["Programming", 4], ["itself", 4], ["Boo", 4], ["extensions", 4], ["called", 4], ["Syntax", 4], ["management", 4]];
+
+
+// soh cah toa
+
+function rad2deg(r) {
+    return r / (Math.PI/180);
+}
+
+var svgNS = 'http://www.w3.org/2000/svg';
+
+var makeNode = function(doc, name, settings) {
+    var node = doc.createElementNS(svgNS, name);
+    for (var name in settings) {
+        var value = settings[name];
+        if (value != null && value != null && 
+                (typeof value != 'string' || value != '')) {
+            node.setAttribute(name, value);
+        }
+    }
+    return node;
+}
+
+function complete_cloud(cloud) {
+    var d = {};
+    var firstword = cloud.placed_words[0];
+
+    cloud.placed_words.forEach(function(word) {
+        var dx = (firstword.x + (firstword.width /2)) - (word.x + (word.width /2)),
+            dy = (firstword.y + (firstword.height/2)) - (word.y + (word.height/2)),
+            dl = (dx*dx + dy*dy);
+    
+        var ang = Math.round(rad2deg(Math.atan2(dy, dx)))
+        //ang = Math.floor(ang*10) / 10;
+        
+        //console.log(word.word, 'ang', ang, Math.floor(ang / 10) * 10 );
+        if( !d[ang] || d[ang][0] < dl ) {
+            d[ang] = [dl, word];
+        }
+    });
+
+    var bg = document.getElementById('bg');
+
+    for( var ang in d ) {
+        var word = d[ang][1];
+        if( ang < 0 ) {
+            var c_el = makeNode(
+                cloud.options.output_document,
+                'ellipse',
+                {
+                    cx: word.x-word.offset_x+(word.width/2),
+                    cy: word.y-word.offset_y + 10,//-(word.height/2),
+                    rx: (word.width/2) * 1.6,
+                    ry: (word.height ) * 1.6,
+                    fill: '#666', //url(#cloudgrad),
+                    //stroke: 'red',
+                    //'stroke-width': '2px'
+                    //style: 
+                    //    'background: -moz-linear-gradient(blue, white) no-repeat;'
+                }
+            );
+            bg.insertBefore(c_el, bg.childNodes[0]); //, cloud.options.output_target.childNodes[0]);
+
+        }
+    }
+
+}
+
+var cloud;
+
+function go() {
+//console.profile();
+cloud = new vapourword.Cloud(items, 500, 500, {
+    max_font_size: 50,
+    min_font_size: 8,
+    output_target: document.getElementById('target'),
+    output_document: document,
+    add_chunk_time: 50,
+    add_chunk_size: 20,
+    on_complete: function(cloud) {
+        //console.profileEnd();
+        complete_cloud(cloud);
+    },
+});
+}
+
+// ]]>
+</script>
+
+<g id="bg"></g>
+<g id="target"></g>
+
+</svg>
