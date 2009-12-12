@@ -50,6 +50,7 @@ output_html.render_word = function(cloud, word) {
         word.data.style.top = word.y+'px';
     } else {
         //word.data.remove();
+        word.data.style.color = "red";
     }
 }
 

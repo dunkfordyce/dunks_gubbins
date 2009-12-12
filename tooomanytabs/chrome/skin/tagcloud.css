@@ -1,17 +1,18 @@
 @import url(chrome://global/skin/);
 
 #tcloud { 
-    background: #501;
+    /*background: #501;*/
+    background: -moz-linear-gradient(#66f, #ccf) no-repeat;
 }
 
 #tcloud-inner > div {
-    color: #aaa;
+    color: #000;
     cursor: pointer;
     text-decoration: none;
 }
 
 #tcloud-inner > div:hover {
-    color: #fff;
+    color: #000;
     text-decoration: underline;
 }
 

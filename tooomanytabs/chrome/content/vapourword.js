@@ -1,3 +1,5 @@
+ddd('starting vapourword');
+try {
 var vapourword = {};
 (function() {
 
@@ -162,24 +164,48 @@ vapourword.Cloud = function(items, width, height, options) {
             }
             
             var collides = false;
-            for( var j=0; j!= this.placed_words.length; j++ ) {
-                if( word.collides_with(this.placed_words[j]) ) {
+
+            if( false )  {
+                try{
+                if( this.placed_words.some(function(other) {    
+                        word.collides_with(other); 
+                }) ) {
                     collides = true;
-                    //console.log('collide', this.placed_words[j]);
+                }
+
+                if( !collides ) {
                     break;
                 }
-            }
+                edge.fail_count ++;
+                if( edge.fail_count > this.max_edge_fails ) {
+                    to_remove.push(edge.original_index);
+                }
+                } catch(e) {
+                console.log(e);
+                }
+        
+            } else { 
 
-            if( !collides ) {
-                break;
-            }
+                for( var j=0; j!= this.placed_words.length; j++ ) {
+                    if( word.collides_with(this.placed_words[j]) ) {
+                        collides = true;
+                        //console.log('collide', this.placed_words[j]);
+                        break;
+                    }
+                }
 
-            edge.fail_count ++;
-            if( edge.fail_count > this.max_edge_fails ) {
-                to_remove.push(edge.original_index);
+                if( !collides ) {
+                    break;
+                }
+
+                edge.fail_count ++;
+                if( edge.fail_count > this.max_edge_fails ) {
+                    to_remove.push(edge.original_index);
+                }
             }
-            
         }
+
+        word.tried_edges = sel_edge;
 
         if( to_remove.length ) {
             for( var i=to_remove.length-1; i>0; i-- ) {
@@ -264,6 +290,8 @@ vapourword.Cloud = function(items, width, height, options) {
     add_chunk(this);
 }
 
-
-
 })();
+} catch(e) {
+    ddd(e);
+}
+ddd('done vapourword');

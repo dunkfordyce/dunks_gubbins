@@ -8,14 +8,18 @@
         xmlns:html="http://www.w3.org/1999/xhtml"
     >
     <hbox flex="1">
-        <tree id="results" type="places" style="min-width: 200px;">  
+        <tree id="results" type="places" style="min-width: 200px;"
+            hidecolumnpicker="true"
+        >  
           <treecols>  
-            <treecol id="title" label="Bookmarks" flex="1" primary="true" />  
+            <treecol id="title" label="Bookmarks" flex="1" primary="true" 
+                hideheader="true"
+            />  
           </treecols>  
           <treechildren />  
         </tree>  
 
-        <html:div style="position: relative" id="tcloud" flex="3">
+        <html:div style="position: relative; overflow: auto;" id="tcloud" flex="3" width="500" height="500">
             <html:div style="position: relative" id="tcloud-inner">
             </html:div>
         </html:div>

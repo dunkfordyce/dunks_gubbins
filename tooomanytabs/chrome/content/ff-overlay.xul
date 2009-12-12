@@ -2,14 +2,9 @@
 <?xml-stylesheet href="chrome://tooomanytabs/skin/overlay.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://tooomanytabs/locale/overlay.dtd">
 <overlay id="tooomanytabs-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-    <script src="sizzle.js"/>
     <script src="io.js"/>
 
     <script src="tmt.js"/>
-
-    <script src="vapourword.js"/>
-    <script src="vapourword.html.js"/>
-
     <script src="tmt.util.js"/>
     <script src="tmt.activity.js"/>
     <script src="tmt.quickmarks.js"/>
@@ -35,6 +30,9 @@
                 <menuitem label="Tag cloud..."
                         oncommand="tooomanytabs.tagcloud.show();"
                 />
+                <menuitem label="Tag cloud 2..."
+                        oncommand="tooomanytabs.tagcloud.show2();"
+                />
                 <menuitem label="Auto tag"
                         oncommand="tooomanytabs.fasttags.autotag();"
                         key="tooomanytabs-autotag-key"
@@ -47,7 +45,7 @@
     </menupopup>
 
     <popup id="contentAreaContextMenu">
-        <menu label="Tag">
+        <menu label="Tag" id="tooomanytabs-tag-item">
             <menupopup id="tooomanytabs-tag-popup">
             </menupopup>
         </menu>
