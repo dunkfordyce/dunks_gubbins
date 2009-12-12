@@ -7,28 +7,29 @@ util.CCSV = function(cName, ifaceName) {
 
 
 util.ddd = function() {
-    var cs = CCSV("@mozilla.org/consoleservice;1", "nsIConsoleService");
+    var cs = util.CCSV("@mozilla.org/consoleservice;1", "nsIConsoleService");
     cs.logStringMessage(Array.prototype.slice.call(arguments).join(" "));
 };
 
 util.ddlog = function(msg, obj) {
     try {
-        var keys = [], methods = [], k;
+        var keys = [], 
+            methods = [], 
+            k;
         for( k in obj ) { keys.push(k); }
-        for( k in obj.prototype ) { methods.push(k); } 
         keys = keys.sort();
         methods = methods.sort();
-        ddd(msg, obj, "attr", keys.join(", "), "\nproto", methods.join(", "));
+        util.ddd(msg, obj, "attr", keys.join(", "));
     } catch(e) {
-        ddd(msg, obj, "failed print", e);
+        util.ddd(msg, obj, "failed print", e);
     }
 };
 
 util.ddfunc = function(f) {
     function wrapped() {
-        ddd('doing', f.name);
+        util.ddd('doing', f.name);
         f.apply(f.caller, arguments);
-        ddd('done', f.name);
+        util.ddd('done', f.name);
     }
     return wrapped;
 };
@@ -36,9 +37,9 @@ util.ddfunc = function(f) {
 
 util.notification = function(msg) {
     var n = gBrowser.getNotificationBox(
-            gBrowser.getBrowserForTab(gBrowser.selectedTab)
-    );
-    var note = n.appendNotification(
+                gBrowser.getBrowserForTab(gBrowser.selectedTab)
+        ),
+        note = n.appendNotification(
             msg,
             "tmt-notification",
             null,
@@ -51,9 +52,9 @@ util.notification = function(msg) {
 };
 
 util.for_every_window = function(func) {
-    var wm = util.CCSV("@mozilla.org/appshell/window-mediator;1", "nsIWindowMediator");
-    var browserEnumerator = wm.getEnumerator("navigator:browser");
-    var browserWin;
+    var wm = util.CCSV("@mozilla.org/appshell/window-mediator;1", "nsIWindowMediator"),
+        browserEnumerator = wm.getEnumerator("navigator:browser"),
+        browserWin;
     while (browserEnumerator.hasMoreElements()) {
         browserWin = browserEnumerator.getNext();
         if( func(browserWin) ) return true;
@@ -61,10 +62,10 @@ util.for_every_window = function(func) {
 };
 
 util.for_every_tab_in_browser = function(browserWin, func) {
-    var tabbrowser = browserWin.gBrowser;
-    var numTabs = tabbrowser.browsers.length;
-    var browser, tab;
-    for (var index = 0; index < numTabs; index++) {
+    var tabbrowser = browserWin.gBrowser,
+        numTabs = tabbrowser.browsers.length,
+        browser, tab, index;
+    for (index = 0; index < numTabs; index++) {
         browser = tabbrowser.getBrowserAtIndex(index);
         tab = tabbrowser.tabContainer.childNodes[index]
         if( func(browserWin, tabbrowser, index, tab, browser) ) return true;
@@ -78,10 +79,11 @@ util.for_every_tab = function(func) {
 };
 
 util.distanceOfTimeInWords = function(fromTime, toTime, includeSeconds) {
-    var fromSeconds = fromTime.getTime();
-    var toSeconds = toTime.getTime();
-    var distanceInSeconds = Math.round(Math.abs(fromSeconds - toSeconds) / 1000)
-    var distanceInMinutes = Math.round(distanceInSeconds / 60)
+    var fromSeconds = fromTime.getTime(),
+        toSeconds = toTime.getTime(),
+        distanceInSeconds = Math.round(Math.abs(fromSeconds - toSeconds) / 1000),
+        distanceInMinutes = Math.round(distanceInSeconds / 60);
+
     if (distanceInMinutes <= 1) {
         if (!includeSeconds)
             return (distanceInMinutes == 0) ? 'less than a minute' : '1 minute'
