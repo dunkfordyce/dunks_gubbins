@@ -102,8 +102,8 @@ function tag_untag(uri, add, remove) {
 /* 
 return automatically calculated tags for a document
 */
-function auto_calc_tags(doc, initial) {
-    var strings = initial || [];
+function auto_calc_tags(doc, filter) {
+    var strings = [];
     Array.forEach(document.getElementsByTagName, function(el) {
         if( el.name == 'keywords' || el.name == 'description' ) {
             strings.push(el.content);
@@ -113,7 +113,7 @@ function auto_calc_tags(doc, initial) {
         strings.push(document.title);
     }
     return string_to_tags(strings.join(" "), function(tag) {
-        return (user_ignores.indexOf(tag) == -1);
+        return (user_ignores.indexOf(tag) == -1 && (!filter || filter(tag)))
     });
 }
 
@@ -138,12 +138,14 @@ ft.init = function() {
             // automatically calc tags if there is no selection
             // otherwise use the text selection to calc tags
             new_tags = ( !selection.length ? 
-                auto_calc_tags(browser.contentDocument) :
+                auto_calc_tags(browser.contentDocument, function(tag) {
+                    return old_tags.indexOf(tag) == -1
+                }) :
                 string_to_tags(selection, function(tag) { 
-                        return !( 
-                            user_ignores.indexOf(tag) != -1 ||
-                            old_tags.indexOf(tag) != -1
-                        )
+                    return !( 
+                        user_ignores.indexOf(tag) != -1 ||
+                        old_tags.indexOf(tag) != -1
+                    )
                 })
             );
 
