@@ -12,6 +12,7 @@ p{
 /*Main Container*/
 .container3 {
 	width:100%;
+    position: relative;
 }
 .container3 ul{
 	list-style-type: none;
@@ -27,37 +28,76 @@ p{
 .handle3 {
 	float: left;
 	width: 64px;
-	height: 314px;
 	text-align:center;
+    height: 100%;
 
-	background: #666;
-	border: 1px solid white;
+    background: -moz-linear-gradient(top, #ccc 0%,
+                          #9BCB2A 20%,
+                          #5DA331 90%,
+                          #659635 99%,
+                          #ccc 100%);
+    border: 1px solid #ccc;
+    opacity: 0.3;
+    -moz-border-radius: 10px;
 }
-.handle3 img{
-	margin-top:2px;
-	filter:alpha(opacity=80);-moz-opacity:.80;opacity:.80;
+.handle3 div.t{
+	/*margin-top:2px;*/
+    height: 100%;
+    position:relative;
 }
+
+.handle3 div.t1 {
+    background: url('favourties.png'), url('logo.png');
+    background-position: center bottom, -50 0;
+    background-repeat: no-repeat, no-repeat;
+}
+.handle3 div.t2 {
+    background: url('history.png'), url('logo.png');
+    background-position: center bottom, -116 0;
+    background-repeat: no-repeat, no-repeat;
+}
+.handle3 div.t3 {
+    background: url('other_tabs.png'), url('logo.png');
+    background-position: center bottom, -182 0;
+    background-repeat: no-repeat, no-repeat;
+}
+
+.handle3 div h2 {
+    -moz-transform: rotate(-90deg); 
+    bottom:50px;
+    color:white;
+    display:inline;
+    left:-54px;
+    padding:0;
+    position:absolute;
+}
+
 .handleOver3{
-	
-	background: red;
-	border: 1px solid white;
+	/*background: red;*/
+	/*border: 1px solid white;*/
+    opacity: 0.6;
 }
-.handleOver3 img{
-	margin-top:2px;
-	filter:alpha(opacity=70);-moz-opacity:.70;opacity:.70;
+.handleOver3 div {
+	/*margin-top:2px;*/
 }
 .handleSelected3{
-	
-	background: #000;
-	border: 1px solid white;
+	opacity:.90;
 }
 /*Content Container*/
 .contentWrapper3{
 	text-align: justify;
-	
+	position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
 }
 .contentInnerWrapper3{
-	padding: 10px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
 }
 .contentWrapper3 h3{
 	border-bottom: 1px solid silver;
@@ -69,6 +109,10 @@ p{
 	width:0px;
 	height: 310px;	
 	overflow:hidden;
+}
+.contentContainer {
+    position:relative;
+    height: 100%;
 }
 
 /*  TEST 4  */

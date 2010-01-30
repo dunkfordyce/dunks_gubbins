@@ -186,7 +186,7 @@
 				if(settings.fixedWidth){
 					finalWidth = settings.fixedWidth;
 				}else{
-					finalWidth = containerWidth-(elementCount*handleWidth)-handleWidth;
+					finalWidth = containerWidth-(elementCount*handleWidth) - 11;//-handleWidth;
 				}
 				
 				$('#'+container+' > li, .'+container+' > li').each(function(i) {

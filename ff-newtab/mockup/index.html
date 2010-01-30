@@ -1,6 +1,9 @@
 <html>
     <head>
         <style type="text/css">
+            @import url("jquery.hrzAccordion.defaults.css");
+            @import url("jquery.hrzAccordion.examples.css");
+
             a {
                 display: block;
 
@@ -44,21 +47,21 @@
 
             #recent {
                 position: absolute;
-                overflow: hidden;
-                left: 10px;
-                width: 400px;
-                top: 10px;
-                bottom: 10px;
+                left: 2px;
+                right: 2px;
+                top: 2px;
+                bottom: 2px;
+                margin: 2px;
             }
 
             #history {
                 position: absolute;
                 overflow: hidden;
                 clip: auto;
-                left: 420px;
-                right: 10px;
-                top: 10px;
-                bottom: 10px;
+                left: 0px;
+                right: 0px;
+                top: 0px;
+                bottom: 0px;
                 vertical-align: center;
             }
 
@@ -74,37 +77,37 @@
 
             #history-older, #history-newer {
                 border: 1px solid white;
-                width: 50px;
+                left: 0px;
+                right: 0px;
                 position: absolute;
-                top: 0px;
-                bottom: 0px;
+                height: 20px;
                 -moz-border-radius: 10px;
             }
 
             #history-older {
-                left: 0px;
+                bottom: 0px;
             }
         
             #history-newer {
-                right: 0px;
+                top: 0px;
             }
 
             #history-line { 
                 position: absolute;
                 background: green;
-                left: 0px;
-                right: 0px;
-                top: 50%;
+                top: 0px;
+                bottom: 0px;
+                left: 50%;
                 padding: 2px;
             }
 
             .history-mark {
                 position: absolute;
-                top: 50%;
-                padding-left: 1px;
-                padding-right: 1px;
-                padding-top: 10px;
-                padding-bottom: 10px;
+                left: 50%;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-top: 1px;
+                padding-bottom: 1px;
                 background: green;
             }
         </style>
@@ -114,69 +117,81 @@
         <script type="text/javascript" src="jquery.hrzAccordion.js"></script>
 
         <script type="text/javascript">
-        $(document.ready(function() {
-            $(".test2").hrzAccordion({
-                handlePosition: "right",                         
-                openOnLoad: 5,  
-                closeOpenAnimation: 2
-            });
+        $(document).ready(function() {
+            $(".test3").hrzAccordion({
+               //containerClass     : "container3",
+               listItemClass      : "listItem3",
+               contentWrapper     : "contentWrapper3",
+               contentInnerWrapper: "contentInnerWrapper3",
+               handleClass        : "handle3",
+               handleClassOver    : "handleOver3",
+               handleClassSelected: "handleSelected3",
+               openOnLoad: 1
+              });
         });
         </script>
-
-
     </head>
     <body>
+        <div class="main-box" id="recent">
+            <ul class="test3" style="position: absolute; left: 2px; top: 2px; bottom: 2px; right: 2px; border: 0px solid blue;">
+                <li>
+                    <div class="handle3">
+                        <div class="t t1">
+                        </div>
+                    </div>
+                    <a style="font-size: 150%;" href="http://google.com">
+                        <img height="50" style="float: left;" src="https://mail.google.com/mail/images/favicon.ico">
+                        <span class="title">Google Search Engine</span><br>
+                        <span class="url">http://google.com</span>
+                    </a>
+                    <a style="font-size: 100%;" href="http://google.com">
+                        <img height="30" style="float: left;" src="https://mail.google.com/mail/images/favicon.ico">
+                        <span class="title">Google Search Engine</span><br>
+                        <span class="url">http://google.com</span>
+                    </a>
+                    <a style="font-size: 90%;" href="http://google.com">
+                        <img style="float: left;" src="https://mail.google.com/mail/images/favicon.ico">
+                        <span class="title">Google Search Engine</span><br>
+                        <span class="url">http://google.com</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="handle3">
+                        <div class="t t2">
+                        </div>
+                    </div>
+                    <div class="main-box" id="history">
+                        <div id="history-older"></div>
+                        <div id="history-newer"></div>
 
-        <ul class="test2">
-            <li>
-                <div class="handle3"><img src="com_01.gif"/></div>
-                <h3>content1</h3>
-                <p>blah</p>
-            </li>
-            <li>
-                <div class="handle3"><img src="com_02.gif"/></div>
-                <h3>boo</h3>
-                <p>booools</p>
-            </li>
-        </ul>
+                        <div id="history-line"></div>
+                        <div style="top: 50px;" class="history-mark"></div>
+                        <div style="top: 100px;" class="history-mark"></div>
+                        <div style="top: 150px;" class="history-mark"></div>
+                        <div style="top: 200px;" class="history-mark"></div>
+                        <div style="top: 250px;" class="history-mark"></div>
+                        <div style="top: 300px;" class="history-mark"></div>
+                        <div style="top: 350px;" class="history-mark"></div>
+                        <div style="top: 400px;" class="history-mark"></div>
+                        <div style="top: 450px;" class="history-mark"></div>
+                        <div style="top: 500px;" class="history-mark"></div>
+                        <div style="top: 550px;" class="history-mark"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="handle3">
+                        <div class="t t3">
+                        </div>
+                    </div>
+                    <h3>boo</h3>
+                    <p>booools</p>
+                </li>
+            </ul>
+        </div>
 
 
         <!--
-        <div class="main-box" id="recent">
-            <a style="font-size: 150%;" href="http://google.com">
-                <img height="50" style="float: left;" src="https://mail.google.com/mail/images/favicon.ico">
-                <span class="title">Google Search Engine</span><br>
-                <span class="url">http://google.com</span>
-            </a>
-            <a style="font-size: 100%;" href="http://google.com">
-                <img height="30" style="float: left;" src="https://mail.google.com/mail/images/favicon.ico">
-                <span class="title">Google Search Engine</span><br>
-                <span class="url">http://google.com</span>
-            </a>
-            <a style="font-size: 90%;" href="http://google.com">
-                <img style="float: left;" src="https://mail.google.com/mail/images/favicon.ico">
-                <span class="title">Google Search Engine</span><br>
-                <span class="url">http://google.com</span>
-            </a>
-        </div>
 
-        <div class="main-box" id="history">
-            <div id="history-older"></div>
-            <div id="history-newer"></div>
-
-            <div id="history-line"></div>
-            <div style="left: 50px;" class="history-mark"></div>
-            <div style="left: 100px;" class="history-mark"></div>
-            <div style="left: 150px;" class="history-mark"></div>
-            <div style="left: 200px;" class="history-mark"></div>
-            <div style="left: 250px;" class="history-mark"></div>
-            <div style="left: 300px;" class="history-mark"></div>
-            <div style="left: 350px;" class="history-mark"></div>
-            <div style="left: 400px;" class="history-mark"></div>
-            <div style="left: 450px;" class="history-mark"></div>
-            <div style="left: 500px;" class="history-mark"></div>
-            <div style="left: 550px;" class="history-mark"></div>
-        </div>
         -->
         
     </body>
