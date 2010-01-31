@@ -1,17 +1,17 @@
 <html>
     <head>
         <style type="text/css">
-            @import url("jquery.hrzAccordion.defaults.css");
-            @import url("jquery.hrzAccordion.examples.css");
+            @import url("chrome://ffnewtab/content/jquery.hrzAccordion.defaults.css");
+            @import url("chrome://ffnewtab/content/jquery.hrzAccordion.examples.css");
 
-            a {
+            .favourite {
                 display: block;
 
                 font-family: Helvetica, Arial, sans-serif;
                 font-weight: bold;
                 font-size: 138.5%;
                  
-                text-align: center;
+                text-align: left;
                 text-decoration: none;
 
                 padding: 10px;
@@ -22,14 +22,20 @@
                 text-shadow: +1px +1px 2px #777777;
                 color: #ffffff;
 
+                /*
                 background: -moz-linear-gradient(top, #CFE782 0%,
                                       #9BCB2A 2%,
                                       #5DA331 97%,
                                       #659635 100%);
+                */
+                background: -moz-linear-gradient(top, #ccc 0%,
+                                      #BBBFED 2%,
+                                      #969CEB 97%,
+                                      #5F69E8 100%);
                 margin: 5px;
             }
         
-            a:hover {
+            .favourite:hover {
                 background: -moz-linear-gradient(top, #CFE782 0%,
                                       #aBdB3A 2%,
                                       #6Db341 97%,
@@ -41,8 +47,16 @@
                 border: 0px; 
             }
 
-            .url {
+            .favourite .url {
                 font-size: 85%;
+            }
+
+            .favourite_urls {
+                display: block;
+            }
+
+            .favourite_urls > .li {
+                display: block;
             }
 
             #recent {
@@ -110,7 +124,89 @@
                 padding-bottom: 1px;
                 background: green;
             }
+
+            .handle3 div.t1 {
+                background: url('chrome://ffnewtab/content/favourties.png'), url('chrome://ffnewtab/content/logo.png');
+                background-position: center bottom, -50 0;
+                background-repeat: no-repeat, no-repeat;
+            }
+            .handle3 div.t2 {
+                background: url('chrome://ffnewtab/content/history.png'), url('chrome://ffnewtab/content/logo.png');
+                background-position: center bottom, -116 0;
+                background-repeat: no-repeat, no-repeat;
+            }
+            .handle3 div.t3 {
+                background: url('other_tabs.png'), url('logo.png');
+                background-position: center bottom, -182 0;
+                background-repeat: no-repeat, no-repeat;
+            }
         </style>
+
+        <script type="text/javascript">
+        function makeURI(aURL, aOriginCharset, aBaseURI) {  
+            var ioService = Components.classes["@mozilla.org/network/io-service;1"]  
+                        .getService(Components.interfaces.nsIIOService);  
+            return ioService.newURI(aURL, aOriginCharset, aBaseURI);  
+        }  
+
+        var historyService = Components.classes["@mozilla.org/browser/nav-history-service;1"]
+                                       .getService(Components.interfaces.nsINavHistoryService);
+
+        // No query options set will get all history, sorted in database order,
+        // which is nsINavHistoryQueryOptions.SORT_BY_NONE.
+        var options = historyService.getNewQueryOptions();
+        options.sortingMode = options.SORT_BY_VISITCOUNT_DESCENDING;
+        options.resultType = options.RESULTS_AS_URI;
+
+        // No query parameters will return everything
+        var query = historyService.getNewQuery();
+
+        // execute the query
+        var result = historyService.executeQuery(query, options);
+
+        var cont = result.root;
+            cont.containerOpen = true;
+            
+        var dom_data = {};
+
+        for (var i = 0; i < cont.childCount; i ++) {
+            var node = cont.getChild(i);
+            //document.write(node.accessCount+','+node.title+','+node.uri+'<br/>');
+            var uri = makeURI(node.uri);
+            if( !dom_data[uri.host] ) {
+                dom_data[uri.host] = {
+                    host: uri.host,
+                    accessCount: 0,
+                    urls: []
+                };
+            }
+            dom_data[uri.host].urls.push({accessCount: node.accessCount, title: node.title, uri: node.uri});
+            dom_data[uri.host].accessCount += node.accessCount;
+        }
+ 
+        var sorted_dom_data = [];
+        for( var k in dom_data ) {
+            sorted_dom_data.push(dom_data[k]);
+        }       
+
+        sorted_dom_data.sort(function(a, b) {
+            return b.accessCount - a.accessCount;
+        });
+
+        //document.write('<ul>');
+        sorted_dom_data.forEach(function(dom) {
+            //document.write('<li>'+dom.accessCount + ','+dom.host + '<ul>');
+            dom.urls.sort(function(a, b) {
+                return b.accessCount - a.accessCount;
+            });
+            //dom.urls.forEach(function(url) {
+            //    document.write('<li>'+url.accessCount+' '+url.uri+'</li>');
+            //});
+            //document.write('</ul></li>');
+        });
+        //document.write('</ul>');
+
+        </script>
 
         <script type="text/javascript" src="jquery-1.3.2.js"></script>
         <script type="text/javascript" src="jquery.easing.1.3.js"></script>
@@ -128,6 +224,21 @@
                handleClassSelected: "handleSelected3",
                openOnLoad: 1
               });
+
+            var $fav = $('#template_fav').clone();
+            $('#template_fav').remove();
+            var $target = $('#favourites');
+            sorted_dom_data.forEach(function(dom) {
+                var $el = $fav.clone();
+                $el.find('.url').text(dom.host || 'localhost');
+                var $ul  = $el.find('ul');
+                /*
+                dom.urls.forEach(function(url) {
+                    $ul.append($('<li/>').text(url.uri));
+                });
+                */
+                $target.append($el);
+            });
         });
         </script>
     </head>
@@ -139,12 +250,17 @@
                         <div class="t t1">
                         </div>
                     </div>
-                    <a style="font-size: 150%;" href="http://google.com">
-                        <img height="50" style="float: left;" src="https://mail.google.com/mail/images/favicon.ico">
-                        <span class="title">Google Search Engine</span><br>
-                        <span class="url">http://google.com</span>
-                    </a>
-                    <a style="font-size: 100%;" href="http://google.com">
+                    <div class="favourite" style="font-size: 150%;" href="http://google.com" id="template_fav">
+                        <h1 class="url">http://google.com</h1>
+                        <ul class="favourite_urls">
+                            <li>x</li>
+                            <li>y</li>
+                        </ul>           
+                    </div>
+                    <div id="favourites">
+
+                    </div>
+                    <!--a style="font-size: 100%;" href="http://google.com">
                         <img height="30" style="float: left;" src="https://mail.google.com/mail/images/favicon.ico">
                         <span class="title">Google Search Engine</span><br>
                         <span class="url">http://google.com</span>
@@ -153,7 +269,7 @@
                         <img style="float: left;" src="https://mail.google.com/mail/images/favicon.ico">
                         <span class="title">Google Search Engine</span><br>
                         <span class="url">http://google.com</span>
-                    </a>
+                    </a-->
                 </li>
                 <li>
                     <div class="handle3">
@@ -189,10 +305,5 @@
             </ul>
         </div>
 
-
-        <!--
-
-        -->
-        
     </body>
 </html>
