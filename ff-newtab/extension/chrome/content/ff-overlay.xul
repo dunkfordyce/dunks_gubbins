@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://ffnewtab/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://ffnewtab/locale/overlay.dtd">
+<overlay id="ffnewtab-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script src="overlay.js"/>
+  <script src="ff-overlay.js"/>
+
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="ffnewtab-strings" src="chrome://ffnewtab/locale/overlay.properties"/>
+  </stringbundleset>
+
+  <menupopup id="menu_ToolsPopup">
+    <menuitem id="ffnewtab-hello" label="&ffnewtab.label;"
+              oncommand="ffnewtab.onMenuItemCommand(event);"/>
+  </menupopup>
+
+
+
+
+</overlay>

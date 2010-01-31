@@ -1,0 +1,22 @@
+/* This is just an example.  You shouldn't do this. */
+#ffnewtab-hello
+{
+  color: red ! important;
+}
+#ffnewtab-toolbar-button
+{
+  list-style-image: url("chrome://ffnewtab/skin/toolbar-button.png");
+  -moz-image-region: rect(0px 24px 24px 0px);
+}
+#ffnewtab-toolbar-button:hover
+{
+  -moz-image-region: rect(24px 24px 48px  0px);
+}
+[iconsize="small"] #ffnewtab-toolbar-button
+{
+  -moz-image-region: rect( 0px 40px 16px 24px);
+}
+[iconsize="small"] #ffnewtab-toolbar-button:hover
+{
+  -moz-image-region: rect(24px 40px 40px 24px);
+}

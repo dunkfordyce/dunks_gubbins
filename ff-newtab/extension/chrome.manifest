@@ -1,0 +1,6 @@
+content   ffnewtab                 chrome/content/
+skin      ffnewtab   classic/1.0   chrome/skin/
+locale    ffnewtab   en-US         chrome/locale/en-US/
+
+
+overlay   chrome://browser/content/browser.xul   chrome://ffnewtab/content/ff-overlay.xul

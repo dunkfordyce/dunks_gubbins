@@ -1,0 +1,8 @@
+<!ENTITY ffnewtab.label "Your localized menuitem">
+<!ENTITY ffnewtabContext.label "Your Menuitem">
+<!ENTITY ffnewtabContext.accesskey "Y">
+<!ENTITY ffnewtabToolbarButton.label "Your Toolbar Button">
+<!ENTITY ffnewtabToolbarButton.tooltip "This is your toolbar button!">
+<!ENTITY ffnewtabSidebar.label "Your Sidebar">
+<!ENTITY ffnewtabToolbar.name  "example">
+<!ENTITY ffnewtabToolbar.label "This is an example toolbar. You can hide it under View &gt; toolbars &gt; &ffnewtabToolbar.name;">

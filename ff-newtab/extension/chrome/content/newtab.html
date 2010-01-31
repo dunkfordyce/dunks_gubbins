@@ -1,0 +1,198 @@
+<html>
+    <head>
+        <style type="text/css">
+            @import url("jquery.hrzAccordion.defaults.css");
+            @import url("jquery.hrzAccordion.examples.css");
+
+            a {
+                display: block;
+
+                font-family: Helvetica, Arial, sans-serif;
+                font-weight: bold;
+                font-size: 138.5%;
+                 
+                text-align: center;
+                text-decoration: none;
+
+                padding: 10px;
+                -moz-border-radius: 10px;
+
+                border: 1px solid #659635;
+
+                text-shadow: +1px +1px 2px #777777;
+                color: #ffffff;
+
+                background: -moz-linear-gradient(top, #CFE782 0%,
+                                      #9BCB2A 2%,
+                                      #5DA331 97%,
+                                      #659635 100%);
+                margin: 5px;
+            }
+        
+            a:hover {
+                background: -moz-linear-gradient(top, #CFE782 0%,
+                                      #aBdB3A 2%,
+                                      #6Db341 97%,
+                                      #75a645 100%);
+                text-shadow: -1px -1px 2px #777777;
+            }
+
+            img { 
+                border: 0px; 
+            }
+
+            .url {
+                font-size: 85%;
+            }
+
+            #recent {
+                position: absolute;
+                left: 2px;
+                right: 2px;
+                top: 2px;
+                bottom: 2px;
+                margin: 2px;
+            }
+
+            #history {
+                position: absolute;
+                overflow: hidden;
+                clip: auto;
+                left: 0px;
+                right: 0px;
+                top: 0px;
+                bottom: 0px;
+                vertical-align: center;
+            }
+
+            .main-box {
+                border: 1px solid white;
+                -moz-border-radius: 10px;
+                background: #eee;
+            }
+
+            body {
+                background: #ccc;
+            }
+
+            #history-older, #history-newer {
+                border: 1px solid white;
+                left: 0px;
+                right: 0px;
+                position: absolute;
+                height: 20px;
+                -moz-border-radius: 10px;
+            }
+
+            #history-older {
+                bottom: 0px;
+            }
+        
+            #history-newer {
+                top: 0px;
+            }
+
+            #history-line { 
+                position: absolute;
+                background: green;
+                top: 0px;
+                bottom: 0px;
+                left: 50%;
+                padding: 2px;
+            }
+
+            .history-mark {
+                position: absolute;
+                left: 50%;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-top: 1px;
+                padding-bottom: 1px;
+                background: green;
+            }
+        </style>
+
+        <script type="text/javascript" src="jquery-1.3.2.js"></script>
+        <script type="text/javascript" src="jquery.easing.1.3.js"></script>
+        <script type="text/javascript" src="jquery.hrzAccordion.js"></script>
+
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $(".test3").hrzAccordion({
+               //containerClass     : "container3",
+               listItemClass      : "listItem3",
+               contentWrapper     : "contentWrapper3",
+               contentInnerWrapper: "contentInnerWrapper3",
+               handleClass        : "handle3",
+               handleClassOver    : "handleOver3",
+               handleClassSelected: "handleSelected3",
+               openOnLoad: 1
+              });
+        });
+        </script>
+    </head>
+    <body>
+        <div class="main-box" id="recent">
+            <ul class="test3" style="position: absolute; left: 2px; top: 2px; bottom: 2px; right: 2px; border: 0px solid blue;">
+                <li>
+                    <div class="handle3">
+                        <div class="t t1">
+                        </div>
+                    </div>
+                    <a style="font-size: 150%;" href="http://google.com">
+                        <img height="50" style="float: left;" src="https://mail.google.com/mail/images/favicon.ico">
+                        <span class="title">Google Search Engine</span><br>
+                        <span class="url">http://google.com</span>
+                    </a>
+                    <a style="font-size: 100%;" href="http://google.com">
+                        <img height="30" style="float: left;" src="https://mail.google.com/mail/images/favicon.ico">
+                        <span class="title">Google Search Engine</span><br>
+                        <span class="url">http://google.com</span>
+                    </a>
+                    <a style="font-size: 90%;" href="http://google.com">
+                        <img style="float: left;" src="https://mail.google.com/mail/images/favicon.ico">
+                        <span class="title">Google Search Engine</span><br>
+                        <span class="url">http://google.com</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="handle3">
+                        <div class="t t2">
+                        </div>
+                    </div>
+                    <div class="main-box" id="history">
+                        <div id="history-older"></div>
+                        <div id="history-newer"></div>
+
+                        <div id="history-line"></div>
+                        <div style="top: 50px;" class="history-mark"></div>
+                        <div style="top: 100px;" class="history-mark"></div>
+                        <div style="top: 150px;" class="history-mark"></div>
+                        <div style="top: 200px;" class="history-mark"></div>
+                        <div style="top: 250px;" class="history-mark"></div>
+                        <div style="top: 300px;" class="history-mark"></div>
+                        <div style="top: 350px;" class="history-mark"></div>
+                        <div style="top: 400px;" class="history-mark"></div>
+                        <div style="top: 450px;" class="history-mark"></div>
+                        <div style="top: 500px;" class="history-mark"></div>
+                        <div style="top: 550px;" class="history-mark"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="handle3">
+                        <div class="t t3">
+                        </div>
+                    </div>
+                    <h3>boo</h3>
+                    <p>booools</p>
+                </li>
+            </ul>
+        </div>
+
+
+        <!--
+
+        -->
+        
+    </body>
+</html>
