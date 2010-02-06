@@ -6,17 +6,23 @@
             /* default ------------------------------------------------ */
 
             /* hide container until all is ready */
-            .test, .test2,.test3,.test4{
+            #accoridion {
                 display: none;
+                position: absolute;
+                left: 2px;
+                top: 2px;
+                bottom: 2px;
+                right: 2px;
+                border: 0px solid blue;
             }
             /*Main Container*/
             .container {
-                width:100%;	
+                width:100%;
             }
             .container > ul{
                 list-style-type: none;
                 margin: 0;
-                padding:0;	
+                padding:0;
             }
             .container > ul > li{
                 display: inline;
@@ -25,65 +31,21 @@
             }
             /*Content Container*/
             .contentContainer {
-                padding-left: 0px;	
+                padding-left: 0px;
                 float: left;
                 width:0px;
-                height: 310px;	
+                height: 310px;
                 overflow:hidden;
             }
-            .contentWrapper{	
+            .contentWrapper{
             }
             .contentInnerWrapper{
                 text-align: justify;
                 padding: 10px;
             }
-            /* Handle*/
-            .handle{
-                float: left;
-                width: 38px;
-                height: 310px;
-                margin: 1px;
-                margin-right: -10px;
-                background:  url(../images/blade.png) no-repeat;
-            }
-            .handleOver{	
-                background: url(../images/blade_sel.png) no-repeat;
-            }
-            .handleSelected{	
-                background: url(../images/blade_sel.png) no-repeat;
-            }
 
-            /* examples ------------------------------------------------ */
-            
-            .contentWrapper h3{
-                border-bottom: 1px solid silver;
-                background-color: #dfdfdf;	
-            }
-            p{
-                padding: 10px;
-            }
-
-            /*  TEST 3  */
-
-            /*Main Container*/
-            .container3 {
-                width:100%;
-                position: relative;
-            }
-            /*
-            .container3 ul{
-                list-style-type: none;
-                margin: 0px;
-                padding:0px;	
-            }
-            .container3 li{
-                display: inline; 
-                margin: 0px;
-                padding:0px;
-            }
-            */
             /*Handle*/
-            .handle3 {
+            .handle {
                 float: left;
                 width: 64px;
                 text-align:center;
@@ -98,30 +60,35 @@
                 opacity: 0.3;
                 -moz-border-radius: 10px;
             }
-            .handle3 div.t{
+            .handle .handle-inner {
                 /*margin-top:2px;*/
                 height: 100%;
                 position:relative;
             }
 
-            .handle3 div.t1 {
-                background: url('chrome://ffnewtab/content/history.png'), url('chrome://ffnewtab/content/logo.png');
+            #handle-favourites {
+                background: url('chrome://ffnewtab/content/favourties.png'), url('chrome://ffnewtab/content/logo.png');
                 background-position: center bottom, -50 0;
                 background-repeat: no-repeat, no-repeat;
             }
-            .handle3 div.t2 {
+            #handle-history {
                 background: url('chrome://ffnewtab/content/history.png'), url('chrome://ffnewtab/content/logo.png');
                 background-position: center bottom, -116 0;
                 background-repeat: no-repeat, no-repeat;
             }
-            .handle3 div.t3 {
+            #handle-recently-closed {
+                background: url('recently_closed.png'), url('logo.png');
+                background-position: center bottom, -116 0;
+                background-repeat: no-repeat, no-repeat;
+            }
+            #handle-other-tabs {
                 background: url('other_tabs.png'), url('logo.png');
                 background-position: center bottom, -182 0;
                 background-repeat: no-repeat, no-repeat;
             }
 
-            .handle3 div h2 {
-                -moz-transform: rotate(-90deg); 
+            .handle div h2 {
+                -moz-transform: rotate(-90deg);
                 bottom:50px;
                 color:white;
                 display:inline;
@@ -162,10 +129,10 @@
                 color: #1E90FF;
             }
             .contentContainer3 {
-                padding-left: 0px;	
+                padding-left: 0px;
                 float: left;
                 width:0px;
-                height: 310px;	
+                height: 310px;
                 overflow:hidden;
             }
             .contentContainer {
@@ -187,11 +154,11 @@
                 color: #9e9e9e;
                 font-size: 16px;
             }
-            .test4 .handleOver{	
+            .test4 .handleOver{
                 background: url(../images/blade_grey_sel.png) no-repeat;
             }
             .test4 .handleSelected{
-                
+
                 background: url(../images/blade_grey_sel.png) no-repeat;
             }
 
@@ -203,7 +170,7 @@
                 font-family: Helvetica, Arial, sans-serif;
                 font-weight: bold;
                 font-size: 138.5%;
-                 
+
                 text-align: left;
                 text-decoration: none;
 
@@ -229,7 +196,7 @@
                                       #5F69E8 100%);
                 margin: 5px;
             }
-        
+
             .favourite:hover {
                 background: -moz-linear-gradient(top, #CFE782 0%,
                                       #aBdB3A 2%,
@@ -239,7 +206,7 @@
                 text-shadow: -1px -1px 2px #777777;
                 */
             }
-    
+
             .favourite a {
                 text-decoration: none;
                 color: #f1f1f1;
@@ -248,15 +215,15 @@
                 color: #fff;
             }
 
-            img { 
-                border: 0px; 
+            img {
+                border: 0px;
             }
 
             strong {
                 font-weight: bold;
             }
 
-            
+
             .favourite h1 {
                 float: right;
                 font-size: 85%;
@@ -324,6 +291,7 @@
                 top: 0px;
                 bottom: 0px;
                 vertical-align: center;
+                font-size: 80%;
             }
 
             .main-box {
@@ -348,12 +316,12 @@
             #history-older {
                 bottom: 0px;
             }
-        
+
             #history-newer {
                 top: 0px;
             }
 
-            #history-line { 
+            #history-line {
                 position: absolute;
                 background: green;
                 top: 0px;
@@ -372,17 +340,29 @@
                 background: green;
             }
 
-            .handle3 div.t1 {
+            .history-block {
+                padding: 10px;
+                margin-left: 250px;
+                -moz-border-radius: 10px;
+
+                border: 1px solid #777;
+            }
+
+            .history-block ul {
+                list-style-type: none;
+            }
+
+            .handle div.t1 {
                 background: url('chrome://ffnewtab/content/favourties.png'), url('chrome://ffnewtab/content/logo.png');
                 background-position: center bottom, -50 0;
                 background-repeat: no-repeat, no-repeat;
             }
-            .handle3 div.t2 {
+            .handle div.t2 {
                 background: url('chrome://ffnewtab/content/history.png'), url('chrome://ffnewtab/content/logo.png');
                 background-position: center bottom, -116 0;
                 background-repeat: no-repeat, no-repeat;
             }
-            .handle3 div.t3 {
+            .handle div.t3 {
                 background: url('other_tabs.png'), url('logo.png');
                 background-position: center bottom, -182 0;
                 background-repeat: no-repeat, no-repeat;
@@ -392,69 +372,283 @@
         <script type="text/javascript">
 
         var historyService = Components.classes["@mozilla.org/browser/nav-history-service;1"]
-                                       .getService(Components.interfaces.nsINavHistoryService);
+                               .getService(Components.interfaces.nsINavHistoryService);
         var faviconService = Components.classes["@mozilla.org/browser/favicon-service;1"]
                                .getService(Components.interfaces.nsIFaviconService);
-        var ioService = Components.classes["@mozilla.org/network/io-service;1"]  
-                    .getService(Components.interfaces.nsIIOService);  
+        var ioService = Components.classes["@mozilla.org/network/io-service;1"]
+                               .getService(Components.interfaces.nsIIOService);
+        var sessionService = Components.classes["@mozilla.org/browser/sessionstore;1"]
+                               .getService(Components.interfaces.nsISessionStore);
 
-        function makeURI(aURL, aOriginCharset, aBaseURI) {  
-            return ioService.newURI(aURL, aOriginCharset, aBaseURI);  
-        }  
 
-        // No query options set will get all history, sorted in database order,
-        // which is nsINavHistoryQueryOptions.SORT_BY_NONE.
-        var options = historyService.getNewQueryOptions();
-        options.sortingMode = options.SORT_BY_VISITCOUNT_DESCENDING;
-        options.resultType = options.RESULTS_AS_URI;
-
-        // No query parameters will return everything
-        var query = historyService.getNewQuery();
-
-        // execute the query
-        var result = historyService.executeQuery(query, options);
-
-        var cont = result.root;
-            cont.containerOpen = true;
-            
-        var dom_data = {};
-
-        for (var i = 0; i < cont.childCount; i ++) {
-            var node = cont.getChild(i);
-            //document.write(node.accessCount+','+node.title+','+node.uri+'<br/>');
-            var uri = makeURI(node.uri);
-            if( !dom_data[uri.host] ) {
-                dom_data[uri.host] = {
-                    host: uri.host,
-                    accessCount: 0,
-                    urls: []
-                };
-            }
-            dom_data[uri.host].urls.push({accessCount: node.accessCount, title: node.title, uri: node.uri});
-            dom_data[uri.host].accessCount += node.accessCount;
+        function makeURI(aURL, aOriginCharset, aBaseURI) {
+            return ioService.newURI(aURL, aOriginCharset, aBaseURI);
         }
- 
+
+        function color_2_string(c) {
+            c = c.toString(16);
+            while( c.length < 6 ) {
+                c = "0" + c;
+            }
+            return '#'+c;
+
+        }
+
+        function random_color() {
+            return Math.round(0xffffff * Math.random()).toString(16);
+        }
+
+        hsl2rgb = function(h, s, l) {
+            var r, g, b;
+            if(s === 0) {
+                r = g = b = l; // achromatic
+            } else {
+                var hue2rgb = function(p, q, t) {
+                    if(t < 0) {t += 1;}
+                    if(t > 1) {t -= 1;}
+                    if(t < 1/6) {return p + (q - p) * 6 * t;}
+                    if(t < 1/2) {return q;}
+                    if(t < 2/3) {return p + (q - p) * (2/3 - t) * 6;}
+                    return p;
+                };
+
+                var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                var p = 2 * l - q;
+                r = hue2rgb(p, q, h + 1/3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1/3);
+            }
+
+            return [r * 255, g * 255, b * 255];
+        };
+        rgb2hsl = function(r, g, b){
+            r /= 255; g /= 255; b /= 255;
+            var max = Math.max(r, g, b), min = Math.min(r, g, b);
+            var h, s, l = (max + min) / 2;
+
+            if(max == min) {
+                h = s = 0; // achromatic
+            } else {
+                var d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch(max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+
+            return [h * 255, s * 255, l * 255];
+        };
+
+        function lighten_color(c, amt) {
+            var hsl = rgb2hsl((c>>16)&0xff, (c>>8)&0xff, c&0xff);
+            var rgb = hsl2rgb(hsl[0]/255, hsl[1]/255, amt/255.0);
+            return (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+        }
+
+
+        var _left = 0;
+
+        function favicon_to_color(uri, cb) {
+            var $canvas = $('<canvas/>').attr({width: 32, height: 32});
+            var $img = $('<img/>').attr('src', uri);
+            //$canvas.appendTo($('body'));
+            //$img.appendTo($('body'));
+            $canvas.css({
+                top: 100,
+                left: _left,
+                position: 'absolute',
+                width: 32,
+                height: 32
+            });
+            $img.css({
+                top: 132,
+                left: _left,
+                position: 'absolute',
+                width: 32,
+                height: 32
+            });
+            _left += 33;
+            $img.load(function() {
+                var ctx = $canvas[0].getContext('2d');
+                ctx.drawImage(this, 0, 0, 32, 32);
+                var data = ctx.getImageData(0, 0, 32, 32);
+                var colors = {};
+                if( data.data.length ) {
+                var d = data.data;
+                for( var i=0; i<data.data.length; i+=4 ) {
+                    if( d[i+3] < 127 ) {
+                        continue;
+                    }
+                    var c = (d[i] << 16) | (d[i+1] << 8) | (d[i+2])
+                    c = c.toString(16);
+                    colors[c] = colors[c] ? colors[c] + 1 : 1;
+                }
+                var max=0, col=0;
+                for( var c in colors )  {
+                    if( c!=0 && colors[c] > max ) {
+                        max = colors[c];
+                        col = c;
+                    }
+                }
+                cb(parseInt(col, 16));
+                }
+            });
+        }
+
         var sorted_dom_data = [];
-        for( var k in dom_data ) {
-            sorted_dom_data.push(dom_data[k]);
-        }       
+        function get_favourites() {
+            // No query options set will get all history, sorted in database order,
+            // which is nsINavHistoryQueryOptions.SORT_BY_NONE.
+            var options = historyService.getNewQueryOptions();
+            options.sortingMode = options.SORT_BY_VISITCOUNT_DESCENDING;
+            options.resultType = options.RESULTS_AS_URI;
 
-        sorted_dom_data.sort(function(a, b) {
-            return b.accessCount - a.accessCount;
-        });
+            // No query parameters will return everything
+            var query = historyService.getNewQuery();
 
-        //document.write('<ul>');
-        sorted_dom_data.forEach(function(dom) {
-            //document.write('<li>'+dom.accessCount + ','+dom.host + '<ul>');
-            dom.urls.sort(function(a, b) {
+            // execute the query
+            var result = historyService.executeQuery(query, options);
+
+            var cont = result.root;
+                cont.containerOpen = true;
+
+            var dom_data = {};
+
+            for (var i = 0; i < cont.childCount; i ++) {
+                var node = cont.getChild(i);
+                //document.write(node.accessCount+','+node.title+','+node.uri+'<br/>');
+                var uri = makeURI(node.uri);
+                if( !dom_data[uri.host] ) {
+                    dom_data[uri.host] = {
+                        host: uri.host,
+                        accessCount: 0,
+                        urls: []
+                    };
+                }
+                dom_data[uri.host].urls.push({accessCount: node.accessCount, title: node.title, uri: node.uri});
+                dom_data[uri.host].accessCount += node.accessCount;
+            }
+
+            for( var k in dom_data ) {
+                sorted_dom_data.push(dom_data[k]);
+            }
+
+            sorted_dom_data.sort(function(a, b) {
                 return b.accessCount - a.accessCount;
             });
-            //dom.urls.forEach(function(url) {
-            //    document.write('<li>'+url.accessCount+' '+url.uri+'</li>');
-            //});
-            //document.write('</ul></li>');
-        });
-        //document.write('</ul>');
+
+            //document.write('<ul>');
+            sorted_dom_data.forEach(function(dom) {
+                //document.write('<li>'+dom.accessCount + ','+dom.host + '<ul>');
+                dom.urls.sort(function(a, b) {
+                    return b.accessCount - a.accessCount;
+                });
+                //dom.urls.forEach(function(url) {
+                //    document.write('<li>'+url.accessCount+' '+url.uri+'</li>');
+                //});
+                //document.write('</ul></li>');
+            });
+            //document.write('</ul>');
+        }
+        get_favourites();
+
+        var history_data = [];
+        function get_history() {
+            // No query options set will get all history, sorted in database order,
+            // which is nsINavHistoryQueryOptions.SORT_BY_NONE.
+            var options = historyService.getNewQueryOptions();
+            options.sortingMode = options.SORT_BY_DATE_DESCENDING;
+            options.resultType = options.RESULTS_AS_URI;
+
+            // No query parameters will return everything
+            var query = historyService.getNewQuery();
+
+            // execute the query
+            var result = historyService.executeQuery(query, options);
+
+            var cont = result.root;
+                cont.containerOpen = true;
+
+            var $target = $('#history');
+            var now = new Date;
+
+            var block = {host:null};
+            var host_data = {};
+
+            var $target = $('#history');
+
+            var init_host = function(host, $d) {
+                host_data[host] = {
+                    col: random_color()
+                };
+                var hdata = host_data[host];
+                favicon_to_color(block.uris[0][2], function(color) {
+                    //hdata.col= color_2_string(lighten_color(color, 128));
+                    var c1 = color_2_string(lighten_color(color, 230));
+                    var c2 = color_2_string(lighten_color(color, 180));
+                    //$d.css('background', hdata.col);
+                    $('#history [host='+host+']').css('background', '-moz-linear-gradient(top,'+c1+' 0%, '+c2+' 100%)');
+                });
+
+            };
+
+            var create_block = function() {
+                var $d = $('<div/>').attr('host', block.host);
+                if( !host_data[block.host] ) {
+                    init_host(block.host, $d);
+                }
+                ($d
+                    .addClass('history-block')
+                    .css('background', host_data[block.host].col)
+                    .appendTo($target)
+                );
+                $last_div = $d;
+                var $ul = $('<ul/>').appendTo($d);
+                $.each(block.uris, function(idx, uri) {
+                    $ul.append($('<li/>').text(uri[0]));
+                });
+            };
+
+            for (var i = 0; i < cont.childCount; i ++) {
+                var node = cont.getChild(i);
+                //var then = new Date(node.time/ 1000);
+                //var d = (now - then) / 1000;
+                //console.log(node.uri, now, then, (now - then) / 1000);
+                //$('<div/>').css({top: d / (60*60)}).addClass('history-mark').appendTo($target);
+                var uri = makeURI(node.uri);
+                if( block.host != uri.host ) {
+                    if( block.host ) {
+                        create_block();
+                    }
+                    block = {host: uri.host, uris: []};
+                }
+                block.uris.push([node.uri, node.title, node.icon]);
+            }
+            if( block.host ) {
+                create_block();
+            }
+//                        <div style="top: 50px;" class="history-mark"></div>
+        }
+        //get_history();
+
+        function get_recently_closed() {
+            var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+                               .getService(Components.interfaces.nsIWindowMediator);
+            var gBrowser = wm.getMostRecentWindow("navigator:browser");
+            console.log(gBrowser);
+            var data = eval( "(" + sessionService.getClosedTabData(gBrowser) + ")" );
+            console.log(data);
+
+            var $target = $('#recently-closed');
+            
+            data.forEach(function(item) {
+                $('<div/>').text(item.state.entries[0].url).appendTo($target);
+            });
+        }
+        var grc = get_recently_closed;
 
         </script>
 
@@ -466,12 +660,12 @@
 
         <script type="text/javascript">
         function g() {
-            $(".test3").hrzAccordion({
+            $("#accordion").hrzAccordion({
                //containerClass     : "container3",
                listItemClass      : "listItem3",
                contentWrapper     : "contentWrapper3",
                contentInnerWrapper: "contentInnerWrapper3",
-               handleClass        : "handle3",
+               handleClass        : "handle",
                handleClassOver    : "handleOver3",
                handleClassSelected: "handleSelected3",
                openOnLoad: 1
@@ -488,7 +682,7 @@
                     var url = dom.urls[i];
                     $ul.append($('<li/>').append($('<a/>').attr({href: url.uri, title:url.uri}).html('<strong>'+url.title +'</strong> - '+url.uri)));
                 }
-                
+
                 $target.append($el);
 
                 var c = {
@@ -505,65 +699,50 @@
                 $f.position(p.left, p.top + e.detail);
             });
 
-            $('.favourite_urls li').ellipsis();
+            //$('.favourite_urls li').ellipsis();
         }
         $(document).ready(function() {g();});
         </script>
     </head>
     <body>
         <div class="main-box" id="recent">
-            <ul class="test3" style="position: absolute; left: 2px; top: 2px; bottom: 2px; right: 2px; border: 0px solid blue;">
+            <ul id="accordion" style="position: absolute; left: 2px; top: 2px; bottom: 2px; right: 2px; border: 0px solid blue;">
                 <li>
-                    <div class="handle3">
-                        <div class="t t1">
+                    <div class="handle">
+                        <div id="handle-favourites" class="handle-inner">
                         </div>
                     </div>
                     <div class="favourite" style="font-size: 150%;" href="http://google.com" id="template_fav">
                         <div class="favicon"></div>
                         <h1><a class="url">http://google.com</a></h1>
                         <ul class="favourite_urls">
-                        </ul>           
+                        </ul>
                     </div>
                     <div id="favourites">
 
                     </div>
-                    <!--a style="font-size: 100%;" href="http://google.com">
-                        <img height="30" style="float: left;" src="https://mail.google.com/mail/images/favicon.ico">
-                        <span class="title">Google Search Engine</span><br>
-                        <span class="url">http://google.com</span>
-                    </a>
-                    <a style="font-size: 90%;" href="http://google.com">
-                        <img style="float: left;" src="https://mail.google.com/mail/images/favicon.ico">
-                        <span class="title">Google Search Engine</span><br>
-                        <span class="url">http://google.com</span>
-                    </a-->
                 </li>
+                <!--
                 <li>
-                    <div class="handle3">
-                        <div class="t t2">
+                    <div class="handle">
+                        <div id="handle-history" class="handle-inner">
                         </div>
                     </div>
                     <div class="main-box" id="history">
-                        <div id="history-older"></div>
-                        <div id="history-newer"></div>
-
-                        <div id="history-line"></div>
-                        <div style="top: 50px;" class="history-mark"></div>
-                        <div style="top: 100px;" class="history-mark"></div>
-                        <div style="top: 150px;" class="history-mark"></div>
-                        <div style="top: 200px;" class="history-mark"></div>
-                        <div style="top: 250px;" class="history-mark"></div>
-                        <div style="top: 300px;" class="history-mark"></div>
-                        <div style="top: 350px;" class="history-mark"></div>
-                        <div style="top: 400px;" class="history-mark"></div>
-                        <div style="top: 450px;" class="history-mark"></div>
-                        <div style="top: 500px;" class="history-mark"></div>
-                        <div style="top: 550px;" class="history-mark"></div>
+                    </div>
+                </li>
+                -->
+                <li>
+                    <div class="handle">
+                        <div id="handle-recently-closed" class="handle-inner">
+                        </div>
+                    </div>
+                    <div class="main-box" id="recently-closed">
                     </div>
                 </li>
                 <li>
-                    <div class="handle3">
-                        <div class="t t3">
+                    <div class="handle">
+                        <div id="handle-other-tabs" class="handle-inner">
                         </div>
                     </div>
                     <h3>boo</h3>
