@@ -1,0 +1,3 @@
+content firearms chrome/content/firearms/  xpcnativewrappers=no 
+skin    firearms  classic/1.0 chrome/skin/classic/
+overlay chrome://firebug/content/firebugOverlay.xul         chrome://firearms/content/firearms.xul
